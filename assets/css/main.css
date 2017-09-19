@@ -3338,7 +3338,7 @@
 
 		#header.alt {
 			top: 0;
-			background: #F64747;
+			background: #000000;
 		}
 
 		#header .logo {
@@ -3467,7 +3467,7 @@
 		-ms-transition: -ms-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		-webkit-overflow-scrolling: touch;
-		background: #f64242;
+		background: #000000;
 		box-shadow: none;
 		color: #ffffff;
 		height: 100%;
@@ -4182,7 +4182,7 @@
 		background-color: #F64747;
 		color: #fdd1d1;
 		padding: 6em 0 4em 0;
-		background: #F64747;
+		background: #000000;
 	}
 
 		#footer input, #footer select, #footer textarea {
