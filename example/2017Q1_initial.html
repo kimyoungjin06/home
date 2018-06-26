@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF8">
+  <title>GitHub Language Network</title>
+  <script type="text/javascript" src="./dist/exampleUtil.js"></script>
+  <script type="text/javascript" src="./dist/vis.js?ver=4"></script>
+  <link type="text/css" rel="stylesheet" href="./dist/vis-network.min.css">
+
+  <style type="text/css">
+    #mynetwork {
+      width: 800px;
+      height: 800px;
+      border: 1px solid lightgray;
+    }
+
+    #config {
+      float:left;
+      width: 400px;
+      height: 600px;
+    }
+/*    div.nodeContent {
+      position: relative;
+      border: 1px solid lightgray;
+      width: 200px;
+      height: 800px;
+      margin-top: -802px;
+      margin-left: 810px;
+      padding: 10px;
+    }*/
+
+    pre {
+      padding: 5px;
+      margin: 5px;
+    }
+
+    .string {
+      color: green;
+    }
+
+    .number {
+      color: darkorange;
+    }
+
+    .boolean {
+      color: blue;
+    }
+
+    .null {
+      color: magenta;
+    }
+
+    .key {
+      color: red;
+    }
+  </style>
+  
+</head>
+
+<body>
+
+<h2>Github Language Network v0.1 - Young Jin KIM</h2>
+
+<div style="width:700px; font-size:14px; text-align: justify;">
+  This is the language-languages network of github repositories.<br/>
+   The 'languages' is got from API: repo/languages which show bytes of used languages in repository. The 'language' is got grom API: repo:language which means the repository is related with specific language, for example 'd3.js' is related with 'javascript'.
+  <br/><br/>
+  <a href="./2008Q1_physics.html">2008Q1 with physics</a>
+</div>
+
+<p>
+  <label><input type="checkbox" id="fixed" checked="checked"/> Fix in place after import.</label><br>
+</p>
+
+<div id="mynetwork"></div>
+<!-- <div class="nodeContent"><h4>Node Content:</h4>
+  <pre id="nodeContent"></pre>
+</div> -->
+<!-- <div id="config"><div class="config"></div></div> -->
+
+
+<script type="text/javascript">
+  var network;
+
+  var nodes = new vis.DataSet();
+  var edges = new vis.DataSet();
+  var gephiImported;
+  var fixedCheckbox = document.getElementById('fixed');
+  fixedCheckbox.onchange = redrawAll;
+
+  // var nodeContent = document.getElementById('nodeContent');
+
+  loadJSON('./data/2017Q1.json', redrawAll, function(err) {console.log('error')});
+
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    nodes: {
+      shape: 'dot',
+      font: {
+        face: 'Tahoma'
+      }
+    },
+    edges: {
+      // arrow: 'to'
+      width: 0.15,
+      smooth: {
+        type: 'continuous'
+      }
+    },
+    interaction: {
+      tooltipDelay: 200,
+      hideEdgesOnDrag: true
+    },
+    physics: {
+      stabilization: true,
+      barnesHut: {
+        gravitationalConstant: -200000,
+        centralGravity: 0.1,
+        springLength: 1,
+        springConstant: 0.2,
+        damping: 0.9,
+        avoidOverlap: 0.09
+      },
+
+      // forceAtlas2Based: {
+      //   gravitationalConstant: -500,
+      //   centralGravity: 0.001,
+      //   springLength: 80,
+      //   springConstant: 0.1,
+      //   damping: 0.4,
+      //   avoidOverlap: 0.09
+      // },
+      maxVelocity: 0.1,
+      minVelocity: 0.0001,
+      // solver: forceAtlas2Based,
+      timestep: 0.0001
+
+
+      // hierarchicalRepulsion: {
+
+      // }
+    },
+    // configure: {
+    //   filter:function (option, path) {
+    //     if (path.indexOf('physics') !== -1) {
+    //       return true;
+    //     }
+    //     if (path.indexOf('smooth') !== -1 || option === 'smooth') {
+    //       return true;
+    //     }
+    //     return false;
+    //   },
+    //   container: document.getElementById('config')
+    // }
+  };
+
+  network = new vis.Network(container, data, options);
+  // network.on('click', function (params) {
+  //   if (params.nodes.length > 0) {
+  //     var data = nodes.get(params.nodes[0]); // get the data from selected node
+  //     nodeContent.innerHTML = JSON.stringify(data, undefined, 3); // show the data in the div
+  //   }
+  // })
+
+  /**
+   * This function fills the DataSets. These DataSets will update the network.
+   */
+  function redrawAll(gephiJSON) {
+    if (gephiJSON.nodes === undefined) {
+      gephiJSON = gephiImported;
+    }
+    else {
+      gephiImported = gephiJSON;
+    }
+
+    nodes.clear();
+    edges.clear();
+
+    var fixed = fixedCheckbox.checked;
+
+    var parsed = vis.network.gephiParser.parseGephi(gephiJSON, {
+      fixed: fixed,
+      parseColor: true
+      // arrow: to
+    });
+
+    // add the parsed data to the DataSets.
+    nodes.add(parsed.nodes);
+    edges.add(parsed.edges);
+
+    var data = edges.get(2); // get the data from node 2 as example
+    // nodeContent.innerHTML = JSON.stringify(data,undefined,3); // show the data in the div
+    network.fit(); // zoom to fit
+  }
+
+</script>
+
+
+</body>
+</html>
