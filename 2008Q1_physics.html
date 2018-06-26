@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <title>Network | Playing with Physics</title>
+
+  <style type="text/css">
+    body {
+      font: 10pt sans;
+    }
+    #mynetwork {
+      float:left;
+      width: 600px;
+      height: 600px;
+      margin:5px;
+      border: 1px solid lightgray;
+    }
+    #config {
+      float:left;
+      width: 400px;
+      height: 600px;
+    }
+  </style>
+
+
+  <script type="text/javascript" src="./dist/exampleUtil.js"></script>
+  <script type="text/javascript" src="./dist/vis.js"></script>
+  <link href="./dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript">
+    var nodes = new vis.DataSet();
+    var edges = new vis.DataSet();
+    var network;
+
+    loadJSON('./data/2008Q1.json', draw, function(err) {console.log('error')});
+    function draw(gephiJSON) {
+
+      var fixed = fixedCheckbox;
+
+      var parsed = vis.network.gephiParser.parseGephi(gephiJSON, {
+            // fixed: fixed,
+            fixed: false,
+            parseColor: true
+          });
+
+
+      // randomly create some nodes and edges
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+
+      // add the parsed data to the DataSets.
+      nodes.add(parsed.nodes);
+      edges.add(parsed.edges);
+
+      // create a network
+      var container = document.getElementById('mynetwork');
+
+      var options = {
+        nodes: {
+          shape: 'dot',
+          font: {
+            face: 'Tahoma'
+          }
+        },
+        physics: {
+          stabilization: false
+        },
+        configure: {
+          filter:function (option, path) {
+            if (path.indexOf('physics') !== -1) {
+              return true;
+            }
+            if (path.indexOf('smooth') !== -1 || option === 'smooth') {
+              return true;
+            }
+            return false;
+          },
+          container: document.getElementById('config')
+        }
+      };
+      network = new vis.Network(container, data, options);
+      network.fit(); // zoom to fit
+    }
+  </script>
+  
+</head>
+
+<body onload="draw();">
+
+<h2>Github Language Network v0.1 - Young Jin KIM</h2>
+<div style="width: 700px; font-size:14px; text-align: justify;">
+    This is the language-languages network of github repositories.<br/>
+   The 'languages' is got from API: repo/languages which show bytes of used languages in repository. The 'language' is got grom API: repo:language which means the repository is related with specific language, for example 'd3.js' is related with 'javascript'.
+   <br/><br/>
+    <a href="./2017Q1_initial.html">2017Q1 with static position</a>
+</div>
+<p>
+  <label><input type="checkbox" id="fixed" checked="checked"/> Fix in place after import.</label><br>
+</p>
+<br />
+<div id="mynetwork"></div>
+<div id="config"></div>
+
+<p id="selection"></p>
+
+<script type="text/javascript">
+  var fixedCheckbox = document.getElementById('fixed');
+  fixedCheckbox.onchange = draw;
+</script>
+</body>
+</html>
