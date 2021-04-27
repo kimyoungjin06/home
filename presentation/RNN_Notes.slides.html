@@ -14374,7 +14374,7 @@ div.jp-OutputPrompt {
 <div class="reveal">
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="&#49692;&#54872;-&#49888;&#44221;&#47581;(Recurrent-Neural-Network,-RNN)-&#48143;-&#51109;&#45800;&#44592;-&#47700;&#47784;&#47532;(Long-Short-Term-Mermory,-LSTM)">&#49692;&#54872; &#49888;&#44221;&#47581;(Recurrent Neural Network, RNN) &#48143; &#51109;&#45800;&#44592; &#47700;&#47784;&#47532;(Long Short-Term Mermory, LSTM)<a class="anchor-link" href="#&#49692;&#54872;-&#49888;&#44221;&#47581;(Recurrent-Neural-Network,-RNN)-&#48143;-&#51109;&#45800;&#44592;-&#47700;&#47784;&#47532;(Long-Short-Term-Mermory,-LSTM)">&#182;</a></h1><ul>
+<h1 id="&#49692;&#54872;-&#49888;&#44221;&#47581;(Recurrent-Neural-Network,-RNN)-&#48143;-&#51109;&#45800;&#44592;-&#47700;&#47784;&#47532;(Long-Short-Term-Memory,-LSTM)">&#49692;&#54872; &#49888;&#44221;&#47581;(Recurrent Neural Network, RNN) &#48143; &#51109;&#45800;&#44592; &#47700;&#47784;&#47532;(Long Short-Term Memory, LSTM)<a class="anchor-link" href="#&#49692;&#54872;-&#49888;&#44221;&#47581;(Recurrent-Neural-Network,-RNN)-&#48143;-&#51109;&#45800;&#44592;-&#47700;&#47784;&#47532;(Long-Short-Term-Memory,-LSTM)">&#182;</a></h1><ul>
 <li>Written by Young Jin Kim(kimyoungjin06@gmail.com), 2021.04.27 Tue</li>
 <li>목적: 시계열 예측에 쓰이는 <code>RNN</code>/<code>LSTM</code>을 이해하기 위한 Note</li>
 <li>내용<ul>
@@ -14497,8 +14497,8 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Mathematics-of-RNN">Mathematics of RNN<a class="anchor-link" href="#Mathematics-of-RNN">&#182;</a></h3><p><img src="https://wikidocs.net/images/page/22886/rnn_image4_ver2.PNG" alt="math"></p>
 <ul>
-<li>RNN Cell: $h_t = \tanh(W_x x_t+W_h h_{t−1}+b)$</li>
-<li>Output: $y_t = f(W_y h_t+b)$, $f$; activation function</li>
+<li>$ h_t = \tanh(W_x x_t+W_h h_{t−1}+b)$ (RNN Cell)</li>
+<li>$y_t = f(W_y h_t+b)$, $f$; activation function (Output)</li>
 </ul>
 
 </div>
@@ -14549,7 +14549,7 @@ div.jp-OutputPrompt {
 <p>위의 그림은 LSTM의 전체적인 내부의 모습을 보여줍니다. 전통적인 RNN의 이러한 단점을 보완한 RNN의 일종을 장단기 메모리(Long Short-Term Memory)라고 하며, 줄여서 LSTM이라고 합니다. LSTM은 은닉층의 메모리 셀에 입력 게이트, 망각 게이트, 출력 게이트를 추가하여 불필요한 기억을 지우고, 기억해야할 것들을 정합니다. 요약하면 LSTM은 은닉 상태(hidden state)를 계산하는 식이 전통적인 RNN보다 조금 더 복잡해졌으며 셀 상태(cell state)라는 값을 추가하였습니다. 위의 그림에서는 $t$시점의 셀 상태를 $C_t$로 표현하고 있습니다. LSTM은 RNN과 비교하여 긴 시퀀스의 입력을 처리하는데 탁월한 성능을 보입니다.</p>
 
 </div>
-</div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="0.-Add-Cell-State">0. Add Cell State<a class="anchor-link" href="#0.-Add-Cell-State">&#182;</a></h4><p><img src="https://wikidocs.net/images/page/22888/cellstate.PNG" alt="Cell State image"></p>
 <ul>
@@ -14561,7 +14561,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="1.-Input-Gate">1. Input Gate<a class="anchor-link" href="#1.-Input-Gate">&#182;</a></h4><p><img src="https://wikidocs.net/images/page/22888/inputgate.PNG" alt="Input Gate image"></p>
 <ul>
@@ -14570,7 +14570,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="2.-Forget-Gate">2. Forget Gate<a class="anchor-link" href="#2.-Forget-Gate">&#182;</a></h4><p><img src="https://wikidocs.net/images/page/22888/forgetgate.PNG" alt="Forget Gate image"></p>
 <ul>
@@ -14581,7 +14581,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="3.-Cell-State-(Long-term)">3. Cell State (Long term)<a class="anchor-link" href="#3.-Cell-State-(Long-term)">&#182;</a></h4><p><img src="https://wikidocs.net/images/page/22888/cellstate2.PNG" alt="Cell State image"></p>
 <ul>
@@ -14595,7 +14595,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div><div class="fragment">
+</div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="4.-Output-Gate-and-Hidden-State-(Short-term)">4. Output Gate and Hidden State (Short term)<a class="anchor-link" href="#4.-Output-Gate-and-Hidden-State-(Short-term)">&#182;</a></h4><p><img src="https://wikidocs.net/images/page/22888/outputgateandhiddenstate.PNG" alt="Output Gate and Hidden State image"></p>
 <ul>
@@ -14610,7 +14610,7 @@ div.jp-OutputPrompt {
 </ul>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">&#182;</a></h2><ul>
 <li><a href="https://wikidocs.net/60690">PyTorch로 시작하는 딥러닝 입문 / 10. 순환신경망</a></li>
@@ -14652,7 +14652,7 @@ require(
         Reveal.addEventListener('slidechanged', update);
 
         function setScrollingSlide() {
-            var scroll = true
+            var scroll = false
             if (scroll === true) {
               var h = $('.reveal').height() * 0.95;
               $('section.present').find('section')
