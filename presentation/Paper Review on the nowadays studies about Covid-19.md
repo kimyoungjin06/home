@@ -112,7 +112,7 @@ Delect because error like this
 
 The page build failed for the `master` branch with the following error:
 
-The variable `{{S}` on line 112 in `presentation/Paper Review on the nowadays studies about Covid-19.md` was not properly closed with `}}`. For more information, see https://docs.github.com/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites#tag-not-properly-terminated.
+The variable `{S}` on line 112 in `presentation/Paper Review on the nowadays studies about Covid-19.md` was not properly closed with `}}`. For more information, see https://docs.github.com/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites#tag-not-properly-terminated.
 
 For information on troubleshooting Jekyll see:
 
