@@ -107,7 +107,7 @@
 ### Model dynamics
 
 - 디테일한 수학적 접근은 다음과 같
-
+```
 $$
 {N}_{{S}_{{c}_{i}}\to {E}_{{c}_{i}}}^{(t)} \sim {\rm{Pois}}\left(\frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}{\lambda }_{{p}_{j}}^{(t)}{w}_{ij}^{(t)}\right)+{\rm{Binom}}({S}_{{c}_{i}}^{(t)},{\lambda }_{{c}_{i}}^{(t)})
 $$
@@ -127,7 +127,7 @@ $$
 $$
 \begin{array}{c}{N}_{{S}_{{c}_{i}}\to {E}_{{c}_{i}}}^{(t)} \sim {\rm{Pois}}\left(\frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}{\lambda }_{{p}_{j}}^{(t)}{w}_{ij}^{(t)}\right)+{\rm{Binom}}({S}_{{c}_{i}}^{(t)},{\lambda }_{{c}_{i}}^{(t)})\\ =\mathop{\underbrace{{\rm{Pois}}\left(\psi \frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}\frac{{d}_{{p}_{j}}^{2}}{{a}_{{p}_{j}}}\left(\mathop{\sum }\limits_{k=1}^{m}\frac{{I}_{{c}_{k}}^{(t)}}{{N}_{{c}_{k}}}{w}_{kj}^{(t)}\right){w}_{ij}^{(t)}\right)}}\limits_{{\rm{New}}\,{\rm{infections}}\,{\rm{from}}\,{\rm{visiting}}\,{\rm{POIs}}}+\mathop{\underbrace{{\rm{Binom}}\left({S}_{{c}_{i}}^{(t)},{\beta }_{{\rm{base}}}\frac{{I}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\right)}}\limits_{{\rm{Base}}\,{\rm{rate}}\,{\rm{of}}\,{\rm{new}}\,{\rm{CBG}}\,{\rm{infections}}}.\end{array}
 $$
-
+```
 ...
 
 더이상은 너무 디테일해서 생략
