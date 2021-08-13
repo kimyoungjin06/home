@@ -108,25 +108,18 @@
 
 - 디테일한 수학적 접근은 다음과 같
 ```
-$$
-{N}_{{S}_{{c}_{i}}\to {E}_{{c}_{i}}}^{(t)} \sim {\rm{Pois}}\left(\frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}{\lambda }_{{p}_{j}}^{(t)}{w}_{ij}^{(t)}\right)+{\rm{Binom}}({S}_{{c}_{i}}^{(t)},{\lambda }_{{c}_{i}}^{(t)})
-$$
+Delect because error like this
 
-$$
-{N}_{{E}_{{c}_{i}}\to {I}_{{c}_{i}}}^{(t)} \sim {\rm{Binom}}({E}_{{c}_{i}}^{(t)},1/{\delta }_{E})
-$$
+The page build failed for the `master` branch with the following error:
 
-$$
-{N}_{{I}_{{c}_{i}}\to {R}_{{c}_{i}}}^{(t)} \sim {\rm{Binom}}({I}_{{c}_{i}}^{(t)},1/{\delta }_{I}),
-$$
+The variable `{{S}` on line 112 in `presentation/Paper Review on the nowadays studies about Covid-19.md` was not properly closed with `}}`. For more information, see https://docs.github.com/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites#tag-not-properly-terminated.
 
-- Cases from visiting POIs: ${\rm{Pois}}(({S}_{{c}_{i}}^{(t)}/{N}_{{c}_{i}}){\sum }_{j=1}^{n}{\lambda }_{{p}_{j}}^{(t)}{w}_{ij}^{(t)})$
-- cases not coptured by visiting POIs: ${\rm{B}}{\rm{i}}{\rm{n}}{\rm{o}}{\rm{m}}({S}_{{c}_{i}}^{(t)},{\lambda }_{{c}_{i}}^{(t)})$
-- Infection rate at POI $p_j$: ${\lambda }_{{p}_{j}}^{(t)}={\beta }_{{p}_{j}}^{(t)}({I}_{{p}_{j}}^{(t)}/{V}_{{p}_{j}}^{(t)})$ where ${V}_{{p}_{j}}^{(t)}={\sum }_{i=1}^{m}{w}_{ij}^{(t)}$
+For information on troubleshooting Jekyll see:
 
-$$
-\begin{array}{c}{N}_{{S}_{{c}_{i}}\to {E}_{{c}_{i}}}^{(t)} \sim {\rm{Pois}}\left(\frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}{\lambda }_{{p}_{j}}^{(t)}{w}_{ij}^{(t)}\right)+{\rm{Binom}}({S}_{{c}_{i}}^{(t)},{\lambda }_{{c}_{i}}^{(t)})\\ =\mathop{\underbrace{{\rm{Pois}}\left(\psi \frac{{S}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\mathop{\sum }\limits_{j=1}^{n}\frac{{d}_{{p}_{j}}^{2}}{{a}_{{p}_{j}}}\left(\mathop{\sum }\limits_{k=1}^{m}\frac{{I}_{{c}_{k}}^{(t)}}{{N}_{{c}_{k}}}{w}_{kj}^{(t)}\right){w}_{ij}^{(t)}\right)}}\limits_{{\rm{New}}\,{\rm{infections}}\,{\rm{from}}\,{\rm{visiting}}\,{\rm{POIs}}}+\mathop{\underbrace{{\rm{Binom}}\left({S}_{{c}_{i}}^{(t)},{\beta }_{{\rm{base}}}\frac{{I}_{{c}_{i}}^{(t)}}{{N}_{{c}_{i}}}\right)}}\limits_{{\rm{Base}}\,{\rm{rate}}\,{\rm{of}}\,{\rm{new}}\,{\rm{CBG}}\,{\rm{infections}}}.\end{array}
-$$
+  https://docs.github.com/articles/troubleshooting-jekyll-builds
+
+If you have any questions you can submit a request at https://support.github.com/contact?repo_id=104066902&page_build_id=272518787
+
 ```
 ...
 
@@ -242,15 +235,4 @@ $$
 | :----------------------------------------------------------: |
 | **Fig 4. Effect of one-way aisle layout on infections.**<br />**(A)** Store layout with one-way aisles. **(B + C)** Number of infections in a store as a function of the customer arrival time and mean number of customers (respectively). We show on the right vertical axis the total exposure time, as the number of infections is proportional to the total exposure time in our model. The one-way layout increases the number of infections with the same arrival rate (see subfigure D). It appears that the number of infections mainly depends on how many customers are in the store on average (see subfigure C). **(D)** Mean customer shopping time. The one-way layout increases the time that customers spend in the store, so more customers are in the store and thereby increase the number of infections. |
 
-|      |
-| :--: |
-|      |
-
-|      |
-| :--: |
-|      |
-
-|      |
-| :--: |
-|      |
 
