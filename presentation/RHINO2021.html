@@ -34,8 +34,9 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-inner comment-enabled" data-hard-breaks="true"><h1 id="Dietary-Pattern-Clustering-with-diabetes" data-id="Dietary-Pattern-Clustering-with-diabetes"><a class="anchor hidden-xs" href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary-Pattern-Clustering-with-diabetes"><span class="octicon octicon-link"></span></a><span>Dietary Pattern Clustering with diabetes</span></h1><ul>
-<li><span>presentation for RHINO2021(2021.08.17 ~ 19), Young Jin Kim(</span><a href="mailto:kimyoungjin06@gmail.com" target="_blank" rel="noopener"><span>kimyoungjin06@gmail.com</span></a><span>)</span></li>
+    <div id="doc" class="markdown-body container-fluid comment-enabled comment-inner" data-hard-breaks="true"><h1 id="Dietary-Pattern-Clustering-with-diabetes" data-id="Dietary-Pattern-Clustering-with-diabetes"><a class="anchor hidden-xs" href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary-Pattern-Clustering-with-diabetes"><span class="octicon octicon-link"></span></a><span>Dietary Pattern Clustering with diabetes</span></h1><ul>
+<li><span>Presentation for RHINO2021(2021.08.17 ~ 19), Young Jin Kim(</span><a href="mailto:kimyoungjin06@gmail.com" target="_blank" rel="noopener"><span>kimyoungjin06@gmail.com</span></a><span>)</span></li>
+<li><mark><span>If you want to </span><ins><span>more discuss</span></ins><span>, pleaase redirect </span><a href="https://hackmd.io/@kssZJxcVQluDOozZSnOuSg/HJfY6SQxK" target="_blank" rel="noopener"><strong><span>here</span></strong></a></mark></li>
 </ul><h6 id="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder" data-id="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder"><a class="anchor hidden-xs" href="#tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder" title="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder"><span class="octicon octicon-link"></span></a><span>tags: </span><code>network</code><span> </span><code>clustering</code><span> </span><code>modularity</code><span> </span><code>dietary pattern</code><span> </span><code>diabetes</code><span> </span><code>manifold learning</code><span> </span><code>auto encoder</code></h6><p><span class="toc"><ul>
 <li><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul>
 <li><a href="#Highlight" title="Highlight">Highlight</a></li>
@@ -67,7 +68,6 @@
 <li><span>Daily food intake follows log-normal distribution.</span></li>
 <li><span>Modularity-based clustering catch the micro difference of dietary pattern.</span></li>
 <li><span>Machine learning algorithms (including neural network model: Auto Encoder and Variational Auto Encoder) don’t catch the micro difference and just learned global pattern (AE).</span></li>
-<li><span>Fig. S1에서 group size distribution 끝까지 그려보기</span></li>
 </ul><h2 id="Introduction" data-id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><span class="octicon octicon-link"></span></a><span>Introduction</span></h2><p><span>Diabetes is one of the most prominent diseases in the 21st century. Not only are there statistical surveys with prevalence rates of around 10% in the world including Korea. The dietary pattern is one of the important factors for the progress of diabetes. We want to find specific dietary patterns more critical to diabetes in KoGES data. We apply the network clustering method and manifold learning like the autoencoder to dietary patterns of Korean and find some micro clusters more critical or healthy for diabetes.</span></p><h2 id="Data-KoGES" data-id="Data-KoGES"><a class="anchor hidden-xs" href="#Data-KoGES" title="Data-KoGES"><span class="octicon octicon-link"></span></a><span>Data: KoGES</span></h2><h3 id="Korean-Genome-and-Epidemiology-Study" data-id="Korean-Genome-and-Epidemiology-Study"><a class="anchor hidden-xs" href="#Korean-Genome-and-Epidemiology-Study" title="Korean-Genome-and-Epidemiology-Study"><span class="octicon octicon-link"></span></a><span>Korean Genome and Epidemiology Study</span></h3><p><span>KoGES(Korean Genome and Epidemiology Study) is one of biggest data-driven bio-project in Korea </span><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup><span>. The KoGES collects epidemiological data and biospecimen, such as blood, urine, and genome from large scale cohort of 40-69 years old by conducting </span><strong><span>medical examination</span></strong><span> and </span><strong><span>health survey</span></strong><span>.</span></p><p><span>In the KoGES, we use one of population-based study “Ansan and Ansung Cohort”</span></p><ul>
 <li><span>Men and women living in Ansan (industrialized community) and Ansung (rural area) aged 40–69 years</span></li>
 <li><span>10,030 baseline participants (Ansan: 5,012 Ansung: 5,018)</span></li>
@@ -77,34 +77,34 @@
 </blockquote><p><span>The dietary pattern of the KoGES is made by a survey of the intake and frequency (average in last a year) of the typical food in Korea. The typical foods in survey are 100s. We grouped these foods to 26 represent food groups</span><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><span>. We estimate daily intake of each food group by the survey and make dietary pattern of each patient.</span></p><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="Food distribution" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/food_distribution.png?raw=true" alt="Food distribution" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure1. Food distribution in the baseline. The intake of each food follow a log-normal distribution. The number of bins is 9 and the frequency line is smoothen with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-20-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-130" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-131" class="mjx-mrow"><span id="MJXc-Node-132" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-133" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-134" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-20">\sigma=1</script></span><span>​.​ The non-intake food isn’t counted.</span></td>
+<td style="text-align:center"><strong><span>Figure1</span></strong><span>. Food distribution in the baseline. The intake of each food follow a log-normal distribution. The number of bins is 9 and the frequency line is smoothen with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-21-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-135" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-136" class="mjx-mrow"><span id="MJXc-Node-137" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-138" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-139" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-21">\sigma=1</script></span><span>​.​ The non-intake food isn’t counted.</span></td>
 </tr>
 </tbody>
 </table><p><span>The KoGES dataset contains some anthropometric data like Body Mass Index(BMI). Figure 2 shows correlations between total energy and anthropometric data, and the correlations are not significant. The total energy is estimated using the dietary pattern and national standard ingredients of food. So, there are anomaly data point (almost zero-calories or nearby 10,000 Kcal) in estimated total energy using survey.</span></p><table>
 <thead>
 <tr>
-<th><img src="" alt="anthropometric data" loading="lazy"></th>
+<th><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/anthropometric_data.png?raw=true" alt="anthropometric data" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span>Figure 2. The correlation of total energy and anthropometric data. The blue(green) circle is normal subject (diabetes mellitus) and black dashed line is frequency of total energy. (d-f) show some results from Inbody(3.0) - </span><strong><span>(d)</span></strong><span> BDCMSC(amount of muscle), </span><strong><span>(e)</span></strong><span> BDFTR(body fat ratio), and </span><strong><span>(f)</span></strong><span> ABFTR(abdomen fat ratio).</span></td>
+<td><strong><span>Figure 2</span></strong><span>. The correlation of total energy and anthropometric data. The blue(green) circle is normal subject (diabetes mellitus) and black dashed line is frequency of total energy. (d-f) show some results from Inbody(3.0) - </span><strong><span>(d)</span></strong><span> BDCMSC(amount of muscle), </span><strong><span>(e)</span></strong><span> BDFTR(body fat ratio), and </span><strong><span>(f)</span></strong><span> ABFTR(abdomen fat ratio).</span></td>
 </tr>
 </tbody>
 </table><h3 id="Definition-of-diabetes-and-prediabetes" data-id="Definition-of-diabetes-and-prediabetes"><a class="anchor hidden-xs" href="#Definition-of-diabetes-and-prediabetes" title="Definition-of-diabetes-and-prediabetes"><span class="octicon octicon-link"></span></a><span>Definition of diabetes and prediabetes</span></h3><p><span>Incident Diabetes Mellitus (DM) was defined as self-reported physician-diagnosed diabetes and/or subjects with current treatment for diabetes (i.e. oral agents and/or insulin) and/or current American Diabetes Association (ADA) guidelines: a fasting glucose concentration ≥126mg/dL or a post 2-h glucose during 75g oral glucose tolerance test (OGTT) of ≥200mg/dL, or HbA1c of ≥6.5% </span><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup><span>. Subjects with prediabetes were also defined by ADA guidelines: the presence of impaired fasting glucose (IFG) and/or impaired glucose tolerance (IGT) and/or HbA1c 5.7-6.4%. IFG is defined as fasting glucose concentration between 100 and 125mg/dL </span><sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup><sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup><span> and IGT as post 2-h glucose during 75g OGTT levels between 140 and 199mg/dL </span><sup class="footnote-ref"><a href="#fn4" id="fnref4:1">[4:1]</a></sup><span>.</span></p><h3 id="CONSORT-flow-diagram" data-id="CONSORT-flow-diagram"><a class="anchor hidden-xs" href="#CONSORT-flow-diagram" title="CONSORT-flow-diagram"><span class="octicon octicon-link"></span></a><span>CONSORT flow diagram</span></h3><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="CONSORT_flow_diagram" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/AE_decoded.png?raw=true?raw=true" alt="CONSORT_flow_diagram" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 3. CONSORT flow diagram. We focus on 6,127 non-diabetes subjects in baseline. 12.8% of these subjects got the diabetes in outcome.</span></td>
+<td style="text-align:center"><strong><span>Figure 3</span></strong><span>. CONSORT flow diagram. We focus on 6,127 non-diabetes subjects in baseline. 12.8% of these subjects got the diabetes in outcome.</span></td>
 </tr>
 </tbody>
 </table><h2 id="Method" data-id="Method"><a class="anchor hidden-xs" href="#Method" title="Method"><span class="octicon octicon-link"></span></a><span>Method</span></h2><h3 id="Modularity-based-clustering" data-id="Modularity-based-clustering"><a class="anchor hidden-xs" href="#Modularity-based-clustering" title="Modularity-based-clustering"><span class="octicon octicon-link"></span></a><span>Modularity-based clustering</span></h3><p><span>Modularity is a measurement of network structure. It means strength of module structure (group, community, or cluster). A network with high modularity has dense internal connection in each module and sparse external connection. The modularity </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-18-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>Q</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-78" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-79" class="mjx-mrow"><span id="MJXc-Node-80" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.445em;">Q</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi></math></span></span><script type="math/tex" id="MathJax-Element-18">Q</script></span><span>​ defined the relative internal edge density versus given random network.</span><br>
@@ -120,12 +120,12 @@ Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_
 </ul><p><span>We use Louvain algorithm to measure modularity </span><sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup><span>. This algorithm has advantage with fast calculation and hierarchy. The algorithm merge a node set in a community to a node in each step, so it can obtain the  hierarchy of given network. We user a python package </span><code>scikit-network</code><span> to use Louvain algorithm </span><sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup><span>.</span></p><h2 id="Result" data-id="Result"><a class="anchor hidden-xs" href="#Result" title="Result"><span class="octicon octicon-link"></span></a><span>Result</span></h2><h3 id="Hierarchical-cluster" data-id="Hierarchical-cluster"><a class="anchor hidden-xs" href="#Hierarchical-cluster" title="Hierarchical-cluster"><span class="octicon octicon-link"></span></a><span>Hierarchical cluster</span></h3><p><span>We obtain hierarchy structure of clusters using Louvain algorithm. In low level (lv1), there is not obvious risky/healthy cluster. In more deep stage (lv2~), risky/healthy cluster is appeared (Figure 4).</span></p><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/Hierarchical_cluster.png?raw=true" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 4. Hierarchy of clustering with Louvain algorithm. Each node means a cluster in hierarchy upto lv6. The cluster appears when it contains more than 30 subjects. The size of node means number of cluster and color means diabetes mellitus prevalence(%) in future. The total subject is 6,127.</span></td>
+<td style="text-align:center"><strong><span>Figure 4</span></strong><span>. Hierarchy of clustering with Louvain algorithm. Each node means a cluster in hierarchy upto lv6. The cluster appears when it contains more than 30 subjects. The size of node means number of cluster and color means diabetes mellitus prevalence(%) in future. The total subject is 6,127.</span></td>
 </tr>
 </tbody>
 </table><ul>
@@ -133,58 +133,58 @@ Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_
 </ul><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="sunburst" loading="lazy"></th>
-<th style="text-align:center"><img src="" alt="treemap" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/sunburst.png?raw=true" alt="sunburst" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/treemap.png?raw=true" alt="treemap" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><a href="" target="_blank" rel="noopener"><span>sunburst</span></a></td>
-<td style="text-align:center"><a href="" target="_blank" rel="noopener"><span>treemap</span></a></td>
+<td style="text-align:center"><a href="https://kimyoungjin06.github.io/home/presentation/RHINO2021/sunburst.html" target="_blank" rel="noopener"><span>sunburst</span></a></td>
+<td style="text-align:center"><a href="https://kimyoungjin06.github.io/home/presentation/RHINO2021/treemap.html" target="_blank" rel="noopener"><span>treemap</span></a></td>
 </tr>
 </tbody>
 </table><h3 id="Details-in-micro-clusters-lv4" data-id="Details-in-micro-clusters-lv4"><a class="anchor hidden-xs" href="#Details-in-micro-clusters-lv4" title="Details-in-micro-clusters-lv4"><span class="octicon octicon-link"></span></a><span>Details in micro clusters (lv4)</span></h3><p><span>We examine typical micro clusters in lv4. The characteristic dietary pattern appear in micro(small) cluster remarkably. Figure 5 shows dietary patterns of top-3 risky/healthy clusters in lv4. The original data doesn’t show any correlation with DM, but the obtained cluster by dietary pattern has significant difference in DM prevalence. It means the modularity-based hierarchical clustering  understand the micro information underlying structure of similarity network of dietary pattern. Figure 6 shows the major nutrition intake of each cluster. The DM subjects are not ‘heavy eater’, rather than they eat less. Especially, they mainly eat carbohydrate.</span></p><h4 id="Dietary-patterns-of-typical-micro-cluster" data-id="Dietary-patterns-of-typical-micro-cluster"><a class="anchor hidden-xs" href="#Dietary-patterns-of-typical-micro-cluster" title="Dietary-patterns-of-typical-micro-cluster"><span class="octicon octicon-link"></span></a><span>Dietary patterns of typical micro cluster</span></h4><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/Figure._DM_high_and_low_risk_food_groups.jpg?raw=true" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 5. Dietary patterns of typical micro cluster in lv4. The color means diabetes mellitus prevalence. Each food score means standardized score with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-10-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-38" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-39" class="mjx-mrow"><span id="MJXc-Node-40" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-41" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-42" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span><span id="MJXc-Node-43" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.163em; padding-bottom: 0.556em;">,</span></span><span id="MJXc-Node-44" class="mjx-mi MJXc-space1"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-45" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-46" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-10">m=3, \sigma=1</script></span><span>. These clusters are top-3 risky/healthy clusters contains more than 100 subjects.</span></td>
+<td style="text-align:center"><strong><span>Figure 5</span></strong><span>. Dietary patterns of typical micro cluster in lv4. The color means diabetes mellitus prevalence. Each food score means standardized score with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-22-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-140" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-141" class="mjx-mrow"><span id="MJXc-Node-142" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-143" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-144" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span><span id="MJXc-Node-145" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.163em; padding-bottom: 0.556em;">,</span></span><span id="MJXc-Node-146" class="mjx-mi MJXc-space1"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-147" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-148" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-22">m=3, \sigma=1</script></span><span>. These clusters are top-3 risky/healthy clusters contains more than 100 subjects.</span></td>
 </tr>
 </tbody>
 </table><h4 id="Major-nutrition-intake" data-id="Major-nutrition-intake"><a class="anchor hidden-xs" href="#Major-nutrition-intake" title="Major-nutrition-intake"><span class="octicon octicon-link"></span></a><span>Major nutrition intake</span></h4><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="Nutrition intake boxplot" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/nutrition_boxplot.png?raw=true" alt="Nutrition intake boxplot" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 6. Major nutrition intake. The healthy (C3, C13, and C15) clusters absorb more calories (especially the form of fat), and the risky clusters absorb more energy from carbohydrate. **The whisker is 1.5.</span></td>
+<td style="text-align:center"><strong><span>Figure 6</span></strong><span>. Major nutrition intake. The healthy (C3, C13, and C15) clusters absorb more calories (especially the form of fat), and the risky clusters absorb more energy from carbohydrate. **The whisker is 1.5.</span></td>
 </tr>
 </tbody>
-</table><h3 id="Manifold-learning-Auto-Encoder" data-id="Manifold-learning-Auto-Encoder"><a class="anchor hidden-xs" href="#Manifold-learning-Auto-Encoder" title="Manifold-learning-Auto-Encoder"><span class="octicon octicon-link"></span></a><span>Manifold learning: Auto Encoder</span></h3><p><span>Auto Encoder is one of manifold learning model to reduce dimension using neural network. The AE is designed to find hidden structure of data. The AE has two main parts: encoder and decoder. The encoder maps the original data </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-3-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>x</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-13" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-14" class="mjx-mrow"><span id="MJXc-Node-15" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-3">x</script></span><span>​ to code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-4-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-16" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-17" class="mjx-mrow"><span id="MJXc-Node-18" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-4">h</script></span><span> (reduced hidden structure) and the decoder maps the code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-5-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-19" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-20" class="mjx-mrow"><span id="MJXc-Node-21" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">h</script></span><span> to re-construction of input </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-6-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-22" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-23" class="mjx-mrow"><span id="MJXc-Node-24" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-25" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-26" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-6">x'</script></span><span>​. If </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-7-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-27" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-28" class="mjx-mrow"><span id="MJXc-Node-29" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">h</script></span><span> contains all information of original data, it can construct </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-8-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-30" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-31" class="mjx-mrow"><span id="MJXc-Node-32" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-33" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-34" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-8">x'</script></span><span> from </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-9-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-35" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-36" class="mjx-mrow"><span id="MJXc-Node-37" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">h</script></span><span>​​.</span></p><p><span>We design structure of the AE with 4 hidden layers (26-12-6-</span><strong><span>3</span></strong><span>-6-12-26). The reduced dimension is 3. In our study, the AE just learned only global information.</span></p><table>
+</table><h3 id="Manifold-learning-Auto-Encoder" data-id="Manifold-learning-Auto-Encoder"><a class="anchor hidden-xs" href="#Manifold-learning-Auto-Encoder" title="Manifold-learning-Auto-Encoder"><span class="octicon octicon-link"></span></a><span>Manifold learning: Auto Encoder</span></h3><p><span>Auto Encoder is one of manifold learning model to reduce dimension using neural network. The AE is designed to find hidden structure of data. The AE has two main parts: encoder and decoder. The encoder maps the original data </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-3-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>x</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-13" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-14" class="mjx-mrow"><span id="MJXc-Node-15" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-3">x</script></span><span> to code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-4-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-16" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-17" class="mjx-mrow"><span id="MJXc-Node-18" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-4">h</script></span><span> (reduced hidden structure) and the decoder maps the code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-5-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-19" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-20" class="mjx-mrow"><span id="MJXc-Node-21" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">h</script></span><span> to re-construction of input </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-6-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-22" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-23" class="mjx-mrow"><span id="MJXc-Node-24" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-25" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-26" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-6">x'</script></span><span>. If </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-7-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-27" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-28" class="mjx-mrow"><span id="MJXc-Node-29" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">h</script></span><span> contains all information of original data, it can construct </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-8-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-30" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-31" class="mjx-mrow"><span id="MJXc-Node-32" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-33" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-34" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-8">x'</script></span><span> from </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-9-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-35" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-36" class="mjx-mrow"><span id="MJXc-Node-37" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">h</script></span><span>.</span></p><p><span>We design structure of the AE with 4 hidden layers (26-12-6-</span><strong><span>3</span></strong><span>-6-12-26). The reduced dimension is 3. In our study, the AE just learned only global information.</span></p><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="AE_decoded" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/AE_decoded.png?raw=true" alt="AE_decoded" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 7. Snapshots of original dietary pattern and decoded pattern using Auto Encoder. The loss function is Mean Square Error. The AE learn global(macro) information about food absorbing. It predict major food accurately. But the AE cannot catch micro information about difference.</span></td>
+<td style="text-align:center"><strong><span>Figure 7</span></strong><span>. Snapshots of original dietary pattern and decoded pattern using Auto Encoder. The loss function is Mean Square Error. The AE learn global(macro) information about food absorbing. It predict major food accurately. But the AE cannot catch micro information about difference.</span></td>
 </tr>
 </tbody>
 </table><p><span>The embeded code doesn’t show difference between DM and non-DM clearly. In other words, AE learn global information to some extent. But the micro information, which can make remarkable difference in DM prevalence, isn’t learned enough.</span></p><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="AE_encoded" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/AE_encoded.png?raw=true" alt="AE_encoded" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure 8. Embeded code(</span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-2-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-6" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-7" class="mjx-mrow"><span id="MJXc-Node-8" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-9" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span><span id="MJXc-Node-10" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-11" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-12" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">dim=3</script></span><span>) obtained by Auto Encoder from dietary pattern. The blue(orange) circle means normal subject(diabetes mellitus). The graphs of diagonal parts is histogram of each embeded dimension.</span></td>
+<td style="text-align:center"><strong><span>Figure 8</span></strong><span>. Embeded code(</span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-24-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-156" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-157" class="mjx-mrow"><span id="MJXc-Node-158" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-159" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span><span id="MJXc-Node-160" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-161" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-162" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math></span></span><script type="math/tex" id="MathJax-Element-24">dim=3</script></span><span>) obtained by Auto Encoder from dietary pattern. The blue(orange) circle means normal subject(diabetes mellitus). The graphs of diagonal parts is histogram of each embeded dimension.</span></td>
 </tr>
 </tbody>
 </table><h2 id="Discussion" data-id="Discussion"><a class="anchor hidden-xs" href="#Discussion" title="Discussion"><span class="octicon octicon-link"></span></a><span>Discussion</span></h2><ul>
@@ -917,45 +917,45 @@ Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_
 </table><h4 id="Figures" data-id="Figures"><a class="anchor hidden-xs" href="#Figures" title="Figures"><span class="octicon octicon-link"></span></a><span>Figures</span></h4><table>
 <thead>
 <tr>
-<th><img src="" alt="t-SNE" loading="lazy"></th>
+<th><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/t-SNE.png?raw=true" alt="t-SNE" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span>Figure S1. Result of manifold learning with t-SNE. The color means logarithmic daily food intake[g], state of Diabetes Mellitus, and the label of clustering(at lv4). Foods with major intake  determine the embeding dimension.</span></td>
+<td><strong><span>Figure S1</span></strong><span>. Result of manifold learning with t-SNE. The color means logarithmic daily food intake[g], state of Diabetes Mellitus, and the label of clustering(at lv4). Foods with major intake  determine the embeding dimension.</span></td>
 </tr>
 </tbody>
 </table><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="cluster number distribution" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/cluster_number_distribution.png?raw=true" alt="cluster number distribution" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure S2. Cluster size and its prevalence of typical micro cluster in Lv4.</span></td>
+<td style="text-align:center"><strong><span>Figure S2</span></strong><span>. Cluster size and its prevalence of typical micro cluster in Lv4.</span></td>
 </tr>
 </tbody>
 </table><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="AE_loss" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/AE_loss.png?raw=true" alt="AE_loss" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure S3. Loss function of Auto Encoder. In learning process, there are step-side decreasing regardless of encoded dimension(last dimension).</span></td>
+<td style="text-align:center"><strong><span>Figure S3</span></strong><span>. Loss function of Auto Encoder. In learning process, there are step-side decreasing regardless of encoded dimension(last dimension).</span></td>
 </tr>
 </tbody>
 </table><table>
 <thead>
 <tr>
-<th style="text-align:center"><img src="" alt="VAE_decoded" loading="lazy"></th>
+<th style="text-align:center"><img src="https://kimyoungjin06.github.io/home/presentation/RHINO2021/VAE_decoded.png?raw=true" alt="VAE_decoded" loading="lazy"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><span>Figure S4. Decoded of Variational Auto Encoder. Original dietary pattern(+) and decoded pattern of VAE(x). The VAE doesn’t learn just global information.</span></td>
+<td style="text-align:center"><strong><span>Figure S4</span></strong><span>. Decoded of Variational Auto Encoder. Original dietary pattern(+) and decoded pattern of VAE(x). The VAE doesn’t learn just global information.</span></td>
 </tr>
 </tbody>
 </table><hr class="footnotes-sep"><section class="footnotes">
@@ -983,28 +983,28 @@ Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
-<li class=""><a href="#Highlight" title="Highlight">Highlight</a></li>
-<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
-<li class=""><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
-<li class=""><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
-<li class=""><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
-<li class=""><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
-<li class=""><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
+<li><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
+<li><a href="#Highlight" title="Highlight">Highlight</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
+<li><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
+<li><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
+<li><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
+<li><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
 </ul>
 </li>
-<li class=""><a href="#Method" title="Method">Method</a><ul class="nav">
-<li class=""><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
+<li><a href="#Method" title="Method">Method</a><ul class="nav">
+<li><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
 </ul>
 </li>
-<li class=""><a href="#Result" title="Result">Result</a><ul class="nav">
-<li class=""><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
-<li class=""><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
-<li class=""><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
+<li><a href="#Result" title="Result">Result</a><ul class="nav">
+<li><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
+<li><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
+<li><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
 </ul>
 </li>
-<li class=""><a href="#Discussion" title="Discussion">Discussion</a></li>
-<li class=""><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
+<li><a href="#Discussion" title="Discussion">Discussion</a></li>
+<li><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
 </ul>
 </li>
 </ul>
@@ -1014,28 +1014,28 @@ Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
-<li class=""><a href="#Highlight" title="Highlight">Highlight</a></li>
-<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
-<li class=""><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
-<li class=""><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
-<li class=""><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
-<li class=""><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
-<li class=""><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
+<li><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
+<li><a href="#Highlight" title="Highlight">Highlight</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
+<li><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
+<li><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
+<li><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
+<li><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
 </ul>
 </li>
-<li class=""><a href="#Method" title="Method">Method</a><ul class="nav">
-<li class=""><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
+<li><a href="#Method" title="Method">Method</a><ul class="nav">
+<li><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
 </ul>
 </li>
-<li class=""><a href="#Result" title="Result">Result</a><ul class="nav">
-<li class=""><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
-<li class=""><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
-<li class=""><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
+<li><a href="#Result" title="Result">Result</a><ul class="nav">
+<li><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
+<li><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
+<li><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
 </ul>
 </li>
-<li class=""><a href="#Discussion" title="Discussion">Discussion</a></li>
-<li class=""><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
+<li><a href="#Discussion" title="Discussion">Discussion</a></li>
+<li><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
 </ul>
 </li>
 </ul>
