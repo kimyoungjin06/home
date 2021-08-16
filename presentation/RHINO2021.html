@@ -1,750 +1,1192 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
+
 <head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-
-<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
-.mac-os-11 { --title-bar-height:28px; }
-html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
-iframe { margin: auto; }
-a.url { word-break: break-all; }
-a:active, a:hover { outline: 0px; }
-.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
-#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
-#write.first-line-indent p { text-indent: 2em; }
-#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
-#write.first-line-indent li { margin-left: 2em; }
-.for-image #write { padding-left: 8px; padding-right: 8px; }
-body.typora-export { padding-left: 30px; padding-right: 30px; }
-.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
-.typora-export .task-list-item input { pointer-events: none; }
-@media screen and (max-width: 500px) {
-  body.typora-export { padding-left: 0px; padding-right: 0px; }
-  #write { padding-left: 20px; padding-right: 20px; }
-  .CodeMirror-sizer { margin-left: 0px !important; }
-  .CodeMirror-gutters { display: none !important; }
-}
-#write li > figure:last-child { margin-bottom: 0.5rem; }
-#write ol, #write ul { position: relative; }
-img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
-button, input, select, textarea { color: inherit; font: inherit; }
-input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
-*, ::after, ::before { box-sizing: border-box; }
-#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
-#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
-p { line-height: inherit; }
-h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
-p { orphans: 4; }
-h1 { font-size: 2rem; }
-h2 { font-size: 1.8rem; }
-h3 { font-size: 1.6rem; }
-h4 { font-size: 1.4rem; }
-h5 { font-size: 1.2rem; }
-h6 { font-size: 1rem; }
-.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
-.hidden { display: none; }
-.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
-a { cursor: pointer; }
-sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
-sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
-#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
-figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
-figure > table { margin: 0px; }
-tr { break-inside: avoid; break-after: auto; }
-thead { display: table-header-group; }
-table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
-table.md-table td { min-width: 32px; }
-.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
-.CodeMirror-linenumber { user-select: none; }
-.CodeMirror { text-align: left; }
-.CodeMirror-placeholder { opacity: 0.3; }
-.CodeMirror pre { padding: 0px 4px; }
-.CodeMirror-lines { padding: 0px; }
-div.hr:focus { cursor: none; }
-#write pre { white-space: pre-wrap; }
-#write.fences-no-line-wrapping pre { white-space: pre; }
-#write pre.ty-contain-cm { white-space: normal; }
-.CodeMirror-gutters { margin-right: 4px; }
-.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
-.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
-#write .md-fences.mock-cm { white-space: pre-wrap; }
-.md-fences.md-fences-with-lineno { padding-left: 0px; }
-#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
-.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
-.CodeMirror-line, twitterwidget { break-inside: avoid; }
-.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
-.footnotes + .footnotes { margin-top: 0px; }
-.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
-li div { padding-top: 0px; }
-blockquote { margin: 1rem 0px; }
-li .mathjax-block, li p { margin: 0.5rem 0px; }
-li blockquote { margin: 1rem 0px; }
-li { margin: 0px; position: relative; }
-blockquote > :last-child { margin-bottom: 0px; }
-blockquote > :first-child, li > :first-child { margin-top: 0px; }
-.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
-#write .footnote-line { white-space: pre-wrap; }
-@media print {
-  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
-  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
-  .typora-export * { -webkit-print-color-adjust: exact; }
-  .typora-export #write { break-after: avoid; }
-  .typora-export #write::after { height: 0px; }
-  .is-mac table { break-inside: avoid; }
-  .typora-export-show-outline .typora-export-sidebar { display: none; }
-}
-.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
-a img, img a { cursor: pointer; }
-pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
-p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
-#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
-p > .md-image:only-child { display: inline-block; width: 100%; }
-#write .MathJax_Display { margin: 0.8em 0px 0px; }
-.md-math-block { width: 100%; }
-.md-math-block:not(:empty)::after { display: none; }
-.MathJax_ref { fill: currentcolor; }
-[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
-.md-task-list-item { position: relative; list-style-type: none; }
-.task-list-item.md-task-list-item { padding-left: 0px; }
-.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
-.math { font-size: 1rem; }
-.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
-.md-toc-content { position: relative; margin-left: 0px; }
-.md-toc-content::after, .md-toc::after { display: none; }
-.md-toc-item { display: block; color: rgb(65, 131, 196); }
-.md-toc-item a { text-decoration: none; }
-.md-toc-inner:hover { text-decoration: underline; }
-.md-toc-inner { display: inline-block; cursor: pointer; }
-.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
-.md-toc-h2 .md-toc-inner { margin-left: 2em; }
-.md-toc-h3 .md-toc-inner { margin-left: 4em; }
-.md-toc-h4 .md-toc-inner { margin-left: 6em; }
-.md-toc-h5 .md-toc-inner { margin-left: 8em; }
-.md-toc-h6 .md-toc-inner { margin-left: 10em; }
-@media screen and (max-width: 48em) {
-  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
-  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
-  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
-  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
-}
-a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
-.footnote-line a:not(.reversefootnote) { color: inherit; }
-.md-attr { display: none; }
-.md-fn-count::after { content: "."; }
-code, pre, samp, tt { font-family: var(--monospace); }
-kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
-.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
-code { text-align: left; vertical-align: initial; }
-a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
-.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
-.md-diagram-panel > svg { max-width: 100%; }
-[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
-[lang="mermaid"] .node text { font-size: 1rem; }
-table tr th { border-bottom: 0px; }
-video { max-width: 100%; display: block; margin: 0px auto; }
-iframe { max-width: 100%; width: 100%; border: none; }
-.highlight td, .highlight tr { border: 0px; }
-mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
-.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
-.md-expand mark .md-meta { opacity: 0.3 !important; }
-mark .md-meta { color: rgb(0, 0, 0); }
-@media print {
-  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
-}
-.md-diagram-panel .messageText { stroke: none !important; }
-.md-diagram-panel .start-state { fill: var(--node-fill); }
-.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
-.md-require-zoom-fix { height: auto; margin-top: 16px; margin-bottom: 16px; }
-.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
-.md-fences.md-fences-math { font-size: 1em; }
-.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
-.md-fences-advanced:not(.md-focus) { background: inherit; }
-.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
-.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
-.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
-.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
-@media screen and (max-width: 1024px) {
-  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
-}
-@media screen and (max-width: 800px) {
-  .typora-export-sidebar { display: none; }
-}
-.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
-.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
-.outline-content strong { font-weight: 400; }
-.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
-.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
-.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
-.outline-expander:hover::before { content: ""; }
-.outline-h1 > .outline-item { padding-left: 0px; }
-.outline-h2 > .outline-item { padding-left: 1em; }
-.outline-h3 > .outline-item { padding-left: 2em; }
-.outline-h4 > .outline-item { padding-left: 3em; }
-.outline-h5 > .outline-item { padding-left: 4em; }
-.outline-h6 > .outline-item { padding-left: 5em; }
-.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
-.outline-label:hover { text-decoration: underline; }
-.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
-.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
-.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
-.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
-.outline-children { display: none; }
-.info-panel-tab-wrapper { display: none; }
-.outline-item-open > .outline-children { display: block; }
-.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
-.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
-.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
-.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
-.typora-export-collapse-outline .outline-children { display: none; }
-.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
-.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
-.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
-.md-inline-math-container mjx-container { zoom: 0.95; }
-
-
-:root {
-    --side-bar-bg-color: #fafafa;
-    --control-text-color: #777;
-}
-
-@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
-
-/* open-sans-regular - latin-ext_latin */
-  /* open-sans-italic - latin-ext_latin */
-    /* open-sans-700 - latin-ext_latin */
-    /* open-sans-700italic - latin-ext_latin */
-  html {
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-}
-
-body {
-    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
-    color: rgb(51, 51, 51);
-    line-height: 1.6;
-}
-
-#write {
-    max-width: 860px;
-  	margin: 0 auto;
-  	padding: 30px;
-    padding-bottom: 100px;
-}
-
-@media only screen and (min-width: 1400px) {
-	#write {
-		max-width: 1024px;
-	}
-}
-
-@media only screen and (min-width: 1800px) {
-	#write {
-		max-width: 1200px;
-	}
-}
-
-#write > ul:first-child,
-#write > ol:first-child{
-    margin-top: 30px;
-}
-
-a {
-    color: #4183C4;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    position: relative;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    line-height: 1.4;
-    cursor: text;
-}
-h1:hover a.anchor,
-h2:hover a.anchor,
-h3:hover a.anchor,
-h4:hover a.anchor,
-h5:hover a.anchor,
-h6:hover a.anchor {
-    text-decoration: none;
-}
-h1 tt,
-h1 code {
-    font-size: inherit;
-}
-h2 tt,
-h2 code {
-    font-size: inherit;
-}
-h3 tt,
-h3 code {
-    font-size: inherit;
-}
-h4 tt,
-h4 code {
-    font-size: inherit;
-}
-h5 tt,
-h5 code {
-    font-size: inherit;
-}
-h6 tt,
-h6 code {
-    font-size: inherit;
-}
-h1 {
-    font-size: 2.25em;
-    line-height: 1.2;
-    border-bottom: 1px solid #eee;
-}
-h2 {
-    font-size: 1.75em;
-    line-height: 1.225;
-    border-bottom: 1px solid #eee;
-}
-
-/*@media print {
-    .typora-export h1,
-    .typora-export h2 {
-        border-bottom: none;
-        padding-bottom: initial;
-    }
-
-    .typora-export h1::after,
-    .typora-export h2::after {
-        content: "";
-        display: block;
-        height: 100px;
-        margin-top: -96px;
-        border-top: 1px solid #eee;
-    }
-}*/
-
-h3 {
-    font-size: 1.5em;
-    line-height: 1.43;
-}
-h4 {
-    font-size: 1.25em;
-}
-h5 {
-    font-size: 1em;
-}
-h6 {
-   font-size: 1em;
-    color: #777;
-}
-p,
-blockquote,
-ul,
-ol,
-dl,
-table{
-    margin: 0.8em 0;
-}
-li>ol,
-li>ul {
-    margin: 0 0;
-}
-hr {
-    height: 2px;
-    padding: 0;
-    margin: 16px 0;
-    background-color: #e7e7e7;
-    border: 0 none;
-    overflow: hidden;
-    box-sizing: content-box;
-}
-
-li p.first {
-    display: inline-block;
-}
-ul,
-ol {
-    padding-left: 30px;
-}
-ul:first-child,
-ol:first-child {
-    margin-top: 0;
-}
-ul:last-child,
-ol:last-child {
-    margin-bottom: 0;
-}
-blockquote {
-    border-left: 4px solid #dfe2e5;
-    padding: 0 15px;
-    color: #777777;
-}
-blockquote blockquote {
-    padding-right: 0;
-}
-table {
-    padding: 0;
-    word-break: initial;
-}
-table tr {
-    border: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 0;
-}
-table tr:nth-child(2n),
-thead {
-    background-color: #f8f8f8;
-}
-table th {
-    font-weight: bold;
-    border: 1px solid #dfe2e5;
-    border-bottom: 0;
-    margin: 0;
-    padding: 6px 13px;
-}
-table td {
-    border: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 6px 13px;
-}
-table th:first-child,
-table td:first-child {
-    margin-top: 0;
-}
-table th:last-child,
-table td:last-child {
-    margin-bottom: 0;
-}
-
-.CodeMirror-lines {
-    padding-left: 4px;
-}
-
-.code-tooltip {
-    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
-    border-top: 1px solid #eef2f2;
-}
-
-.md-fences,
-code,
-tt {
-    border: 1px solid #e7eaed;
-    background-color: #f8f8f8;
-    border-radius: 3px;
-    padding: 0;
-    padding: 2px 4px 0px 4px;
-    font-size: 0.9em;
-}
-
-code {
-    background-color: #f3f4f4;
-    padding: 0 2px 0 2px;
-}
-
-.md-fences {
-    margin-bottom: 15px;
-    margin-top: 15px;
-    padding-top: 8px;
-    padding-bottom: 6px;
-}
-
-
-.md-task-list-item > input {
-  margin-left: -1.3em;
-}
-
-@media print {
-    html {
-        font-size: 13px;
-    }
-    table,
-    pre {
-        page-break-inside: avoid;
-    }
-    pre {
-        word-wrap: break-word;
-    }
-}
-
-.md-fences {
-	background-color: #f8f8f8;
-}
-#write pre.md-meta-block {
-	padding: 1rem;
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: #f7f7f7;
-    border: 0;
-    border-radius: 3px;
-    color: #777777;
-    margin-top: 0 !important;
-}
-
-.mathjax-block>.code-tooltip {
-	bottom: .375rem;
-}
-
-.md-mathjax-midline {
-    background: #fafafa;
-}
-
-#write>h3.md-focus:before{
-	left: -1.5625rem;
-	top: .375rem;
-}
-#write>h4.md-focus:before{
-	left: -1.5625rem;
-	top: .285714286rem;
-}
-#write>h5.md-focus:before{
-	left: -1.5625rem;
-	top: .285714286rem;
-}
-#write>h6.md-focus:before{
-	left: -1.5625rem;
-	top: .285714286rem;
-}
-.md-image>.md-meta {
-    /*border: 1px solid #ddd;*/
-    border-radius: 3px;
-    padding: 2px 0px 0px 4px;
-    font-size: 0.9em;
-    color: inherit;
-}
-
-.md-tag {
-    color: #a7a7a7;
-    opacity: 1;
-}
-
-.md-toc { 
-    margin-top:20px;
-    padding-bottom:20px;
-}
-
-.sidebar-tabs {
-    border-bottom: none;
-}
-
-#typora-quick-open {
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
-}
-
-#typora-quick-open-item {
-    background-color: #FAFAFA;
-    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
-    border-style: solid;
-    border-width: 1px;
-}
-
-/** focus mode */
-.on-focus-mode blockquote {
-    border-left-color: rgba(85, 85, 85, 0.12);
-}
-
-header, .context-menu, .megamenu-content, footer{
-    font-family: "Segoe UI", "Arial", sans-serif;
-}
-
-.file-node-content:hover .file-node-icon,
-.file-node-content:hover .file-node-open-state{
-    visibility: visible;
-}
-
-.mac-seamless-mode #typora-sidebar {
-    background-color: #fafafa;
-    background-color: var(--side-bar-bg-color);
-}
-
-.md-lang {
-    color: #b4654d;
-}
-
-/*.html-for-mac {
-    --item-hover-bg-color: #E6F0FE;
-}*/
-
-#md-notification .btn {
-    border: 0;
-}
-
-.dropdown-menu .divider {
-    border-color: #e5e5e5;
-    opacity: 0.4;
-}
-
-.ty-preferences .window-content {
-    background-color: #fafafa;
-}
-
-.ty-preferences .nav-group-item.active {
-    color: white;
-    background: #999;
-}
-
-.menu-item-container a.menu-style-btn {
-    background-color: #f5f8fa;
-    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
-}
-
-
-
-mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-  min-height: 1px;
-  min-width: 1px;
-}
-
-mjx-container[jax="SVG"] > svg a {
-  fill: blue;
-  stroke: blue;
-}
-
-mjx-assistive-mml {
-  position: absolute !important;
-  top: 0px;
-  left: 0px;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 1px 0px 0px 0px !important;
-  border: 0px !important;
-  display: block !important;
-  width: auto !important;
-  overflow: hidden !important;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-mjx-assistive-mml[display="block"] {
-  width: 100% !important;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][display="true"][width="full"] {
-  display: flex;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > g > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
-  stroke-width: 3;
-}
-
-g[data-mml-node="xypic"] path {
-  stroke-width: inherit;
-}
-
-.MathJax g[data-mml-node="xypic"] path {
-  stroke-width: inherit;
-}
- :root {--mermaid-font-zoom:1.44em ;} 
-</style><title>2021_Food_clustering_중간보고</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Dietary Pattern Clustering with diabetes - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit;overflow:visible}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.figma{display:table;position:relative;width:100%;padding-bottom:56.25%}.figma iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;border:1px solid #eee}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{height:40px;padding:10px 4px;border-top-left-radius:0;border-bottom-left-radius:0}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:20px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:50%;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;text-decoration:none;padding-left:22px}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em;font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
 </head>
-<body class='typora-export os-windows'><div class='typora-export-content'>
-<div id='write'  class=''><h1 id='food-data-clustering'><span>Food Data Clustering</span></h1><ul><li><span>2021.07.23, Young Jin Kim(</span><a href='mailto:kimyoungjin06@gmail.com' target='_blank' class='url'>kimyoungjin06@gmail.com</a><span>)</span></li></ul><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n2188"><a class="md-toc-inner" href="#food-data-clustering">Food Data Clustering</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2195"><a class="md-toc-inner" href="#highlight">Highlight</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2199"><a class="md-toc-inner" href="#introduction-background">Introduction (Background)</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2201"><a class="md-toc-inner" href="#diagnose-of-diabetes-in-korea">Diagnose of diabetes in Korea</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2213"><a class="md-toc-inner" href="#result">Result</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2214"><a class="md-toc-inner" href="#consort-flow-diagram">CONSORT flow diagram</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2217"><a class="md-toc-inner" href="#dietary-pattern-clustering">Dietary Pattern Clustering</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2222"><a class="md-toc-inner" href="#baseline-characteristics-1">Baseline characteristics</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2852"><a class="md-toc-inner" href="#main-nutrition-intake">Main nutrition intake</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2855"><a class="md-toc-inner" href="#discussion">Discussion</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2857"><a class="md-toc-inner" href="#data">Data</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2858"><a class="md-toc-inner" href="#koges-korean-genome-and-epidemiology-study">KoGES: Korean Genome and Epidemiology Study</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2861"><a class="md-toc-inner" href="#food-data">Food Data</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2867"><a class="md-toc-inner" href="#activity-data">Activity Data</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2870"><a class="md-toc-inner" href="#data-filtering">Data Filtering</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2872"><a class="md-toc-inner" href="#dietary-patter-similarity-network">Dietary Patter Similarity Network</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2876"><a class="md-toc-inner" href="#method">Method</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2877"><a class="md-toc-inner" href="#modularity-based-clustering">Modularity-based clustering</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2879"><a class="md-toc-inner" href="#supplmentary-material">Supplmentary Material</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n2880"><a class="md-toc-inner" href="#baseline-characteristics-2">Baseline characteristics</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3259"><a class="md-toc-inner" href="#eer-and-total-calories">EER and Total Calories</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3262"><a class="md-toc-inner" href="#bmi-vs-total-energy">BMI vs Total Energy</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3265"><a class="md-toc-inner" href="#prevalence-of-major-cluster">Prevalence of major cluster</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3268"><a class="md-toc-inner" href="#results-of-autoencoder">Results of AutoEncoder</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3275"><a class="md-toc-inner" href="#results-of-variational-autoencoder">Results of Variational AutoEncoder</a></span></p></div><p>&nbsp;</p><h2 id='highlight'><span>Highlight</span></h2><ul><li></li></ul><h2 id='introduction-background'><span>Introduction (Background)</span></h2><p><span>전 세계 20세 이상 인구 11명 중 한 명이 당뇨병을 앓고 있다. 확률로 표현하자면 약 8.6%에 해당한다. 특히 비만이 많은 미국을 북미 지역은 11%에 해당한다. 한국의 경우는 30세 이상의 성인 중 13.8%가 당뇨를 앓고 있다. 당뇨가 특히 위험한 이유는 오래 지속될 경우 다양한 합병증을 유발하기 때문인데, 이러한 이유로 현대에서는 가장 중요한 만성 질병으로 꼽히며, 원인과 예방, 치료법에 대한 지속적인 연구가 이루어지고 있다. 당뇨병은 선천적인 당뇨인 1형 당뇨와 후천적인 당뇨인 2형 당뇨로 구분되는데, 여기서 다뤄지는 당뇨는 2형 당뇨에 한정된다.</span></p><h3 id='diagnose-of-diabetes-in-korea'><span>Diagnose of diabetes in Korea</span></h3><p><span>한국에서 당뇨의 기준은 다음의 4가지 중 하나 이상에 해당하는 경우에 해당한다. KoGES 데이터 상으로는 당뇨에 대한 직접적인 진단 항목은 없기 때문에, 아래 항목을 참고하여 당뇨 진단을 생성해냈다. </span></p><ul><li><span>의사로부터 당뇨병을 진단받은 경우 </span></li><li><span>경구용 혈당강하제 복용 또는 인슐린 치료 중인 경우 </span></li><li><span>공복혈당이 126mg/dL 이상인 경우 </span></li><li><span>당화혈색소가 6.5% 이상인 경우</span></li></ul><p><span>본 연구에서는 음식 섭취 패턴에 따라 당뇨 유병률에 유의미한 차이가 보이는지를 살펴 보았다. 음식 섭취 패턴은 당뇨병이 생기는데 아주 중요한 역할을 한다. 물론, 활동량이 많아서 섭취한 에너지를 전부 소비하면 당뇨에 걸릴 위험은 없다. 하지만 우리는 음식 섭취 패턴에 따라 그 사람의 활동량도 영향을 받을 수 있다는 가설을 설정하였다. 흔히 주변에서 본인의 몸을 가꾸고, 운동을 열심히 하는 사람들은 닭가슴살을 주로 섭취하며, 기름진 음식은 피한다는 것을 알수 있다. 또한 당류가 많은 디저트 또한 비선호하는 성향이 강하다. 이러한 것들을 살펴보면 우리가 생각한 가설은 모든 피험자에게 성립할 수는 없지만, 대체로 그러한 경향성을 보일 수 있다고 생각하였고, 만약 음식 섭취 패턴에 따라 당뇨 유병률에 대한 유의미한 차이가 보인다면, 우리의 가설이 일부분 성립하여 그러한 결론을 이끌어내는 것이 타당하다고 생각하였다. 따라서 보다 직접적인 영양성분의 차이보다 음식의 섭취 패턴의 차이를 이용하여 당뇨 유병률에 대한 유의미한 차이를 찾기 위해 고전적인 k-means clustering으로부터 시작해서, 보다 발전된 군집 기법 중 하나인 GMM (Gaussian Mixture Model), 음식 섭취 패턴의 유사도 Network를 구성하고 Modularity를 활용한 Network 기반의 군집 탐색 기법 또한 활용하였다. 또한 Modularity를 통해 찾은 군집을 예측하는 기계학습 모형을 통해 새로운 데이터가 들어왔을 때 군집을 찾는 Method 또한 수행하였다. 마지막으로 섭취 패턴에 숨겨진 의미를 찾아보기 위해 manifold learning을 위해 AE (AutoEncoder)와 VAE (Variational AutoEncoder)를 적용해보았다.</span></p><h2 id='result'><span>Result</span></h2><h3 id='consort-flow-diagram'><span>CONSORT flow diagram</span></h3><p><span>우리는 1차년도에 대한 10,030명에 대해 필터링을 거친 뒤, 최종적으로 6,127명의 피험자 데이터를 추려냈다. 이후 각 피험자들간의 음식 섭취 유사도를 사용하여 피험자들간의 유사도 네트워크(Similarity Network)를 구성하였다. 이후 네트워크의 모듈성(modularity)를 통해 음식 섭취 유사도 네트워크 속에서의 특히 당뇨 유병률이 높거나 낮은 유의미한 몇가지 군집을 찾아낼 수 있었다. 여기서 사용한 outcome에서의 유병률은 4기까지(+6년) 한 번이라도 당뇨 진단 조건을 만족하는 경우 당뇨로 정의했다. 이럴 경우 모집단(6,127명)에 대한 유병률은 12.8%로 나타났다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723220859095.png" referrerpolicy="no-referrer" alt="image-20210723220859095"></p><h3 id='dietary-pattern-clustering'><span>Dietary Pattern Clustering</span></h3><p><span>26가지 음식군에 대한 섭취 패턴을 이용하여 t-SNE를 통해 2차원으로 임베딩 한 뒤에 각 음식군의 섭취량으로 색칠하면 다음과 같은 그림을 얻을 수 있다. 이를 통하면 세부적으로 봤을 때 어떠한 패턴들이 존재하는 것 처럼 보이지만, 확연한 군집구조는 보이지 않는다. </span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723234057037.png" referrerpolicy="no-referrer" alt="img"></p><p><span>하지만, 음식 섭취 패턴의 유사도 네트워크에서 Louvain Algorithm을 사용하여 구한 군집 구조에서는 유의미한 결과를 찾을 수 있었다. 우리는 Louvain Algorithm을 통해 찾은 군집 구조에서 n수가 충분히 많고(n&gt;100) 유병율이 충분히 높거나 낮은 군집을 각 3개씩 뽑아서  그 섭취 패턴을 나타내었다. 그 결과, 당뇨 위험이 높은 섭취 패턴은 그 유병률이 평균에 비해 1.5배 이상 높은 것으로 나타났다. 또한 낮은 섭취 패턴은 유병률이 절반 이하까지 떨어지는 것을 보있다. 특이하게도, 전체 섭취량이 많다고 당뇨 위험이 높은 것이 아닌, 전체적인 섭취량은 작지만, 특정 음식군을 많이 먹는 섭취 패턴들이 당뇨 위험도가 높게 나타났다. 특히 면만 많이 먹는 군집(C12)의 경우 당뇨 유병률이 그 유병율이 21.1%로  전체 평균 대비 1.64배나 높게 나타났다. 또한 다른 음식들을 적게 먹고 밥과 김치 위주의 식단을 가지는 군집들(C10, C11) 또한 그 유병률이 17% 전후로 나타났다. 반대로, 모든 음식을 골고루 먹는데 김치만을 적게 먹는 군집(C3), 과일과 우유를 많이 먹는 군집(C15)은 그 유병률이 7%정도로 평균 대비 0.54배 정도로 나타났다. 특히 과일만 많이 먹는 군집(C13)의 경우 유병률이 5%대로 평균 대비 0.4배 수준이었다. 이는 현재의 식이습관이 미래에 당뇨병을 얻게 되는데 영향을 미칠수 있다는 가설이 성립한다는 것을 보여준다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/Figure._DM_high_and_low_risk_food_groups.jpg" referrerpolicy="no-referrer" alt="Figure. DM high and low risk_food groups.jpg"></p><h3 id='baseline-characteristics-1'><span>Baseline characteristics</span></h3><p><span>다음 표는 각 군집별 주요 임상지표의 통계값을 나타낸 표이다. Baseline에서도 고위험 군집과 건강한 군집간의 차이가 나타났다. 고위험 군집들에게서 정상인 비율보다 당뇨전증(Prediabetes)의 비율이 일관적으로 높게 나타나는 것을 확인할 수 있었다. 이외에도, 인슐린 저항성과 인슐린 분비와관련된 수치들은 양 군집들 사이에서 확연한 차이를 볼 수 있었다. 이는, 현재 당뇨인 피험자들은 제거를 했음에도 불구하고, 현재의 음식 섭취 패턴(정확히는 지난 1년간의 평균 섭취 패턴)을 통해 고위험 군집들이 이미 어느정도 당뇨병으로 진행하고 있다는 것을 말한다고 볼 수 있다. </span></p><figure><table><thead><tr><th>&nbsp;</th><th><span>High risk group</span></th><th>&nbsp;</th><th>&nbsp;</th><th><span>Low risk group</span></th><th>&nbsp;</th><th>&nbsp;</th></tr></thead><tbody><tr><td>&nbsp;</td><td><span>C10</span></td><td><span>C11</span></td><td><span>C12</span></td><td><span>C3</span></td><td><span>C13</span></td><td><span>C15</span></td></tr><tr><td><span>Number  of participants (n)</span></td><td><span>127</span></td><td><span>118</span></td><td><span>109</span></td><td><span>213</span></td><td><span>107</span></td><td><span>102</span></td></tr><tr><td><span>NGT, n  (%)</span></td><td><span>60 (47.2)</span></td><td><span>52 (44.1)</span></td><td><span>48 (44.0)</span></td><td><span>123 (57.7)</span></td><td><span>57 (53.3)</span></td><td><span>64 (62.7)</span></td></tr><tr><td><span>Prediabetes,  n (%)</span></td><td><span>67 (52.8)</span></td><td><span>66 (55.9)</span></td><td><span>61 (56.0)</span></td><td><span>90 (42.3)</span></td><td><span>50 (46.7)</span></td><td><span>38 (37.3)</span></td></tr><tr><td><span>Age,  year (mean (sd))</span></td><td><span>54.38 (8.96)</span></td><td><span>54.81 (9.31)</span></td><td><span>50.71 (8.76)</span></td><td><span>50.84 (8.51)</span></td><td><span>53.13 (8.66)</span></td><td><span>51.26 (8.36)</span></td></tr><tr><td><span>40~49, n  (%)</span></td><td><span>47 (37.01)</span></td><td><span>41 (34.75)</span></td><td><span>63 (57.80)</span></td><td><span>101 (47.42)</span></td><td><span>37 (34.58)</span></td><td><span>48 (47.06)</span></td></tr><tr><td><span>50~59, n  (%)</span></td><td><span>30 (23.62)</span></td><td><span>26 (22.03)</span></td><td><span>17 (15.60)</span></td><td><span>45 (21.13)</span></td><td><span>32 (29.91)</span></td><td><span>22 (21.57)</span></td></tr><tr><td><span>60~69, n  (%)</span></td><td><span>40 (31.50)</span></td><td><span>40 (33.90)</span></td><td><span>23 (21.10)</span></td><td><span>39 (18.31)</span></td><td><span>25 (23.36)</span></td><td><span>21 (20.59)</span></td></tr><tr><td><span>Men, n  (%)</span></td><td><span>67 (52.76)</span></td><td><span>70 (59.32)</span></td><td><span>81 (74.31)</span></td><td><span>100 (46.95)</span></td><td><span>36 (33.64)</span></td><td><span>35 (34.31)</span></td></tr><tr><td><span>Area</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Anseong  (Rural), n (%)</span></td><td><span>68 (53.54)</span></td><td><span>73 (61.86)</span></td><td><span>61 (55.96)</span></td><td><span>111 (52.11)</span></td><td><span>77 (71.96)</span></td><td><span>52 (50.98)</span></td></tr><tr><td><span>Ansan  (Urban), n (%)</span></td><td><span>59 (46.46)</span></td><td><span>45 (38.14)</span></td><td><span>48 (44.04)</span></td><td><span>102 (47.89)</span></td><td><span>30 (28.04)</span></td><td><span>50 (49.02)</span></td></tr><tr><td><span>Anthropometric  measure</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Height,  cm (mean (sd))</span></td><td><span>159.49 (8.53)</span></td><td><span>160.37 (8.52)</span></td><td><span>163.28 (8.89)</span></td><td><span>160.42 (8.60)</span></td><td><span>157.04 (8.39)</span></td><td><span>158.29 (7.46)</span></td></tr><tr><td><span>Weight,  cm (mean (sd))</span></td><td><span>62.00 (8.60)</span></td><td><span>63.29 (9.46)</span></td><td><span>64.51 (9.92)</span></td><td><span>62.64 (10.04)</span></td><td><span>60.79 (9.56)</span></td><td><span>62.72 (9.90)</span></td></tr><tr><td><span>BMI,  kg/m2 (mean (sd))</span></td><td><span>24.58 (2.82)</span></td><td><span>24.36 (2.97)</span></td><td><span>24.14 (2.95)</span></td><td><span>24.09 (3.01)</span></td><td><span>24.59 (2.92)</span></td><td><span>25.30 (3.37)</span></td></tr><tr><td><span>Waist  circumference, cm</span></td><td><span>82.40 (7.97)</span></td><td><span>83.09 (8.46)</span></td><td><span>82.98 (7.96)</span></td><td><span>82.03 (8.59)</span></td><td><span>83.32 (8.36)</span></td><td><span>82.73 (10.02)</span></td></tr><tr><td><span>Hip  circumference, cm (mean (sd))</span></td><td><span>92.71 (5.74)</span></td><td><span>92.43 (5.48)</span></td><td><span>92.58 (5.83)</span></td><td><span>93.18 (5.55)</span></td><td><span>93.35 (5.74)</span></td><td><span>93.78 (7.13)</span></td></tr><tr><td><span>Waist to  Hip Ratio (mean (sd))</span></td><td><span>0.89 (0.07)</span></td><td><span>0.90 (0.07)</span></td><td><span>0.90 (0.07)</span></td><td><span>0.88 (0.08)</span></td><td><span>0.89 (0.07)</span></td><td><span>0.88 (0.08)</span></td></tr><tr><td><span>Smoke</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Never, n  (%)</span></td><td><span>74 (58.27)</span></td><td><span>60 (50.85)</span></td><td><span>36 (33.03)</span></td><td><span>122 (57.28)</span></td><td><span>73 (68.22)</span></td><td><span>73 (71.57)</span></td></tr><tr><td><span>Former,  n (%)</span></td><td><span>19 (14.96)</span></td><td><span>22 (18.64)</span></td><td><span>25 (22.94)</span></td><td><span>24 (11.27)</span></td><td><span>12 (11.21)</span></td><td><span>11 (10.78)</span></td></tr><tr><td><span>Current,  n (%)</span></td><td><span>32 (25.20)</span></td><td><span>36 (30.51)</span></td><td><span>48 (44.04)</span></td><td><span>66 (30.99)</span></td><td><span>21 (19.63)</span></td><td><span>15 (14.71)</span></td></tr><tr><td><span>Alcohol</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>User, n  (%)</span></td><td><span>5 (3.94)</span></td><td><span>13 (11.02)</span></td><td><span>10 (9.17)</span></td><td><span>13 (6.10)</span></td><td><span>3 (2.80)</span></td><td><span>9 (8.82)</span></td></tr><tr><td><span>Non-user,  n (%)</span></td><td><span>55 (43.31)</span></td><td><span>43 (36.44)</span></td><td><span>27 (24.77)</span></td><td><span>95 (44.60)</span></td><td><span>59 (55.14)</span></td><td><span>61 (59.80)</span></td></tr><tr><td><span>Systolic  Blood Pressure, mmHg</span></td><td><span>119.24 (18.80)</span></td><td><span>119.07 (17.56)</span></td><td><span>117.02 (15.92)</span></td><td><span>114.75 (18.51)</span></td><td><span>117.07 (16.15)</span></td><td><span>117.60 (17.46)</span></td></tr><tr><td><span>Diastolic  Blood Pressure, mmHg</span></td><td><span>75.99 (11.25)</span></td><td><span>76.11 (10.45)</span></td><td><span>76.55 (10.25)</span></td><td><span>73.82 (11.26)</span></td><td><span>74.30 (9.70)</span></td><td><span>75.60 (11.08)</span></td></tr><tr><td><span>Laboratory  finding</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HbA1c,  % (mean (sd))</span></td><td><span>5.56 (0.33)</span></td><td><span>5.59 (0.41)</span></td><td><span>5.56 (0.32)</span></td><td><span>5.54 (0.33)</span></td><td><span>5.56 (0.35)</span></td><td><span>5.51 (0.34)</span></td></tr><tr><td><span>Fasting  glucose, mg/dL (mean (sd))</span></td><td><span>84.09 (8.51)</span></td><td><span>84.20 (9.36)</span></td><td><span>84.38 (9.84)</span></td><td><span>81.68 (8.02)</span></td><td><span>81.32 (6.93)</span></td><td><span>81.25 (7.20)</span></td></tr><tr><td><span>Fasting  insulin, µIU/ml (mean (sd))</span></td><td><span>6.95 (4.48)</span></td><td><span>6.88 (3.38)</span></td><td><span>7.05 (3.88)</span></td><td><span>8.06 (5.88)</span></td><td><span>8.27 (4.22)</span></td><td><span>8.21 (5.19)</span></td></tr><tr><td><span>BUN,  mg/dL (mean (sd))</span></td><td><span>14.64 (3.85)</span></td><td><span>14.29 (3.37)</span></td><td><span>14.37 (3.44)</span></td><td><span>14.07 (3.33)</span></td><td><span>14.46 (3.98)</span></td><td><span>14.17 (3.61)</span></td></tr><tr><td><span>Creatinine,  mg/dL (mean (sd))</span></td><td><span>0.84 (0.19)</span></td><td><span>0.84 (0.16)</span></td><td><span>0.89 (0.17)</span></td><td><span>0.84 (0.21)</span></td><td><span>0.82 (0.47)</span></td><td><span>0.80 (0.15)</span></td></tr><tr><td><span>eGFR,  ml/min per 1.73 m2 (mean (sd))</span></td><td><span>90.64 (14.98)</span></td><td><span>91.65 (11.90)</span></td><td><span>93.18 (14.05)</span></td><td><span>93.27 (13.83)</span></td><td><span>94.70 (14.61)</span></td><td><span>94.19 (13.65)</span></td></tr><tr><td><span>Total  cholesterol, mg/dL (mean (sd))</span></td><td><span>188.65 (33.15)</span></td><td><span>192.35 (38.00)</span></td><td><span>188.39 (36.02)</span></td><td><span>185.05 (32.62)</span></td><td><span>183.18 (30.48)</span></td><td><span>188.44 (36.02)</span></td></tr><tr><td><span>LDL,  mg/dL (mean (sd))</span></td><td><span>114.78 (32.01)</span></td><td><span>116.97 (33.16)</span></td><td><span>105.75 (33.99)</span></td><td><span>111.05 (29.71)</span></td><td><span>108.55 (29.81)</span></td><td><span>114.98 (32.73)</span></td></tr><tr><td><span>HDL,  mg/dL (mean (sd))</span></td><td><span>44.98 (10.39)</span></td><td><span>43.04 (9.58)</span></td><td><span>43.77 (11.23)</span></td><td><span>44.52 (10.33)</span></td><td><span>44.03 (9.11)</span></td><td><span>45.27 (9.26)</span></td></tr><tr><td><span>Triglyceride,  mg/dL (mean (sd))</span></td><td><span>144.48 (72.46)</span></td><td><span>161.69 (86.93)</span></td><td><span>194.37 (124.54)</span></td><td><span>149.50 (86.57)</span></td><td><span>152.98 (94.01)</span></td><td><span>140.94 (60.40)</span></td></tr><tr><td><span>Insulin resistance index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-IR  (mean (sd))</span></td><td><span>1.44 (0.88)</span></td><td><span>1.45 (0.76)</span></td><td><span>1.48 (0.80)</span></td><td><span>1.63 (1.16)</span></td><td><span>1.68 (0.89)</span></td><td><span>1.66 (1.08)</span></td></tr><tr><td><span>QUICKI  (mean (sd))</span></td><td><span>0.38 (0.05)</span></td><td><span>0.38 (0.05)</span></td><td><span>0.38 (0.07)</span></td><td><span>0.37 (0.06)</span></td><td><span>0.37 (0.05)</span></td><td><span>0.37 (0.06)</span></td></tr><tr><td><span>Insulin secretion index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-β (mean (sd))</span></td><td><span>140.21 (138.12)</span></td><td><span>137.41 (89.14)</span></td><td><span>146.95 (155.76)</span></td><td><span>190.99 (191.80)</span></td><td><span>185.21 (119.52)</span></td><td><span>182.20 (121.24)</span></td></tr></tbody></table></figure><p><span>다음은 상위 3개 및 하위 3개 군집을 합쳐서 2개 군집으로 나타냈을 때의 주요 임상지표에 대한 통계값이다. 앞서 이야기했던 차이들을 여전히 잘 확인할 수 있다.</span></p><figure><table><thead><tr><th>&nbsp;</th><th><span>High risk group     (cluster10+11+12)</span></th><th><span>Low risk group     (cluster3+13+15)</span></th><th><span>p-value</span></th><th><span>카이제곱</span></th></tr></thead><tbody><tr><td><span>Number of  participants (n)</span></td><td><span>354</span></td><td><span>422</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>NGT, n (%)</span></td><td><span>160 (45.2)</span></td><td><span>244 (57.8)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Prediabetes,  n (%)</span></td><td><span>194 (54.8)</span></td><td><span>178 (42.2)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Age,  year (mean (sd))</span></td><td><span>53.39 (9.17)</span></td><td><span>51.52 (8.55)</span></td><td><span>0.003</span></td><td><span>0.03577</span></td></tr><tr><td><span>40~49, n  (%)</span></td><td><span>159 (44.9)</span></td><td><span>210 (49.8)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>50~59, n  (%)</span></td><td><span>83 (23.4)</span></td><td><span>114 (27.0)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>60~69, n  (%)</span></td><td><span>112 (31.6)</span></td><td><span>98 (23.2)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Men, n (%)</span></td><td><span>218 (61.58)</span></td><td><span>171 (40.52)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Area</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><span>0.98444</span></td></tr><tr><td><span>Anseong  (Rural), n (%)</span></td><td><span>202 (57.1)</span></td><td><span>240 (56.9)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Ansan  (Urban), n (%)</span></td><td><span>152 (42.9)</span></td><td><span>182 (43.1)</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Anthropometric  measure</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Height, cm  (mean (sd))</span></td><td><span>160.95 (8.76)</span></td><td><span>159.05 (8.39)</span></td><td><span>0.002</span></td><td>&nbsp;</td></tr><tr><td><span>Weight, cm  (mean (sd))</span></td><td><span>63.20 (9.34)</span></td><td><span>62.19 (9.90)</span></td><td><span>0.145</span></td><td>&nbsp;</td></tr><tr><td><span>BMI,  kg/m2 (mean (sd))</span></td><td><span>24.37 (2.91)</span></td><td><span>24.50 (3.11)</span></td><td><span>0.600</span></td><td>&nbsp;</td></tr><tr><td><span>Waist  circumference, cm</span></td><td><span>82.81 (8.12)</span></td><td><span>82.52 (8.90)</span></td><td><span>0.647</span></td><td>&nbsp;</td></tr><tr><td><span>Hip  circumference, cm (mean (sd))</span></td><td><span>92.58 (5.67)</span></td><td><span>93.37 (6.00)</span></td><td><span>0.062</span></td><td>&nbsp;</td></tr><tr><td><span>Waist to  Hip Ratio (mean (sd))</span></td><td><span>0.89 (0.07)</span></td><td><span>0.88 (0.08)</span></td><td><span>0.046</span></td><td>&nbsp;</td></tr><tr><td><span>Smoke</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>0.000</span></td><td><span>&lt;0.0001</span></td></tr><tr><td><span>Never, n  (%)</span></td><td><span>170 (48.02)</span></td><td><span>268 (63.51)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Former, n  (%)</span></td><td><span>66 (18.64)</span></td><td><span>47 (11.14)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Current, n  (%)</span></td><td><span>116 (32.77)</span></td><td><span>102 (24.17)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Alcohol</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>&lt;0.0001</span></td><td><span>0.038</span></td></tr><tr><td><span>User, n  (%)</span></td><td><span>28 (7.91)</span></td><td><span>25 (5.92)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Non-user,  n (%)</span></td><td><span>125 (35.31)</span></td><td><span>215 (50.95)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Systolic  Blood Pressure, mmHg</span></td><td><span>118.50 (17.52)</span></td><td><span>116.02 (17.69)</span></td><td><span>0.051</span></td><td>&nbsp;</td></tr><tr><td><span>Diastolic  Blood Pressure, mmHg</span></td><td><span>76.20 (10.65)</span></td><td><span>74.37 (10.84)</span></td><td><span>0.018</span></td><td>&nbsp;</td></tr><tr><td><span>Laboratory  finding</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HbA1c,  % (mean (sd))</span></td><td><span>5.57 (0.35)</span></td><td><span>5.54 (0.34)</span></td><td><span>0.189</span></td><td>&nbsp;</td></tr><tr><td><span>Fasting  glucose, mg/dL (mean (sd))</span></td><td><span>84.21 (9.19)</span></td><td><span>81.49 (7.55)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr><tr><td><span>Fasting  insulin, µIU/ml (mean (sd))</span></td><td><span>6.96 (3.95)</span></td><td><span>8.15 (5.33)</span></td><td><span>0.001</span></td><td>&nbsp;</td></tr><tr><td><span>BUN,  mg/dL (mean (sd))</span></td><td><span>14.44 (3.56)</span></td><td><span>14.19 (3.57)</span></td><td><span>0.338</span></td><td>&nbsp;</td></tr><tr><td><span>Creatinine,  mg/dL (mean (sd))</span></td><td><span>0.86 (0.17)</span></td><td><span>0.82 (0.29)</span></td><td><span>0.064</span></td><td>&nbsp;</td></tr><tr><td><span>eGFR,  ml/min per 1.73 m2 (mean (sd))</span></td><td><span>91.76 (13.73)</span></td><td><span>93.86 (13.97)</span></td><td><span>0.036</span></td><td>&nbsp;</td></tr><tr><td><span>Total  cholesterol, mg/dL (mean (sd))</span></td><td><span>189.81 (35.65)</span></td><td><span>185.40 (32.93)</span></td><td><span>0.074</span></td><td>&nbsp;</td></tr><tr><td><span>LDL, mg/dL  (mean (sd))</span></td><td><span>112.73 (33.26)</span></td><td><span>111.37 (30.50)</span></td><td><span>0.553</span></td><td>&nbsp;</td></tr><tr><td><span>HDL, mg/dL  (mean (sd))</span></td><td><span>43.96 (10.40)</span></td><td><span>44.58 (9.77)</span></td><td><span>0.396</span></td><td>&nbsp;</td></tr><tr><td><span>Triglyceride,  mg/dL (mean (sd))</span></td><td><span>165.58 (97.70)</span></td><td><span>148.31 (83.02)</span></td><td><span>0.008</span></td><td>&nbsp;</td></tr><tr><td><span>Insulin  resistance index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-IR  (mean (sd))</span></td><td><span>1.45 (0.81)</span></td><td><span>1.65 (1.07)</span></td><td><span>0.006</span></td><td>&nbsp;</td></tr><tr><td><span>QUICKI  (mean (sd))</span></td><td><span>0.38 (0.06)</span></td><td><span>0.37 (0.06)</span></td><td><span>0.081</span></td><td>&nbsp;</td></tr><tr><td><span>Insulin  secretion index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-β (mean (sd))</span></td><td><span>141.36 (130.04)</span></td><td><span>187.40 (160.20)</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='main-nutrition-intake'><span>Main nutrition intake</span></h3><p><span>다음은 각 군집별 주요 영양소의 섭취량을 나타내었다. 앞어 살펴봤듯이, 전체 칼로리 섭취량은 건강한 군집들이 훨씬 높게 나타났으며, 특히 fat의 섭취 비율 또한 높은 편이었다. 반대로, 위험도가 높은 군집들은 전체 칼로리는 낮은데도 불구하고 탄수화물의 비율은 건강한 군집들에 비해 높게 나타났다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/Fig3_boxplot_Total.png" referrerpolicy="no-referrer" alt="Fig3_boxplot_Total.png"></p><h2 id='discussion'><span>Discussion</span></h2><p><span>Discussion 생략</span></p><h2 id='data'><span>Data</span></h2><h3 id='koges-korean-genome-and-epidemiology-study'><span>KoGES: Korean Genome and Epidemiology Study</span></h3><p><span> KoGES는 다양한 집단을 대상으로 여러 수행기관에서 참여자를 모집, 조사를 수행하여 코호트별 목적에 따라 조사 항목에 일부 차이가 있다. KoGES 자료는 대표적으로 일반사항, 질병과거력, 질병 치료현황, 약물력, 가족력, 음주 및 흡연 등 생활습관, 신체활동 등이 포함된 </span><strong><span>설문 항목</span></strong><span>과 혈압 및 맥박 측정, 체성분분석, 혈액 및 소변검사 등 임상검사, 심전도, 흉부 x-ray, 폐기능 검사 등이 포함된 </span><strong><span>검진 항목</span></strong><span> 으로 구성되어 있다. 코호트란 고대 로마 군대의 한 단위를 가리키던 말로, 역학에서 쓰이는 정의로는 어떤 특성을 공유하는 사람들의 집단을 말하며 이들을 장기 추적하여 질병의 발생 요인을 밝히는 연구를 코호트 연구라고 한다. 우리는 여러 코호트 중에서 지역사회기반 코호트인 안산, 안성 코호트 데이터를 사용하였다. 지역사회기반 코호트는 2001년부터 매 2년마다 초기 10,030명에 대해 추적조사를 통해 여러 항목들을 조사하고 있다. 우리는 8차 추적조사까지의 데이터를 사용하여 분석하였다. 장기간의 추적조사이기 때문에, 각 차수마다의 데이터 구성은 조금씩 바뀌기도 하고, 항목 이름이 변경되기도 한다. 또한 측정 기기의 변경, 설문 항목 중 해당 문항의 설명 변화 등으로 데이터에 대한 일관성이 보장되지 않을 수 있기 때문에, 따라서 데이터를 활용하기 위해서는 적절하고 충분한 데이터 전처리가 이루어져야 한다. </span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723212427185.png" referrerpolicy="no-referrer" alt="image-20210723212427185"></p><h3 id='food-data'><span>Food Data</span></h3><p><span>안산, 안성 코호트에는 1, 3기에 음식 관련 설문 항목 존재한다. 설문 항목은 다음과 같다. 1, 3기에 대한 세부 음식은 조금씩 차이가 나며, 양 기수 각각 103가지, 106가지 음식에 대하여 &quot;지난 1년간 평균 섭취 빈도&quot; 및 &quot;평균 1회 섭취분량&quot;을 조사하였다. 참고 문헌</span><sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup><span>처럼 여러 음식들을 몇가지 음식군으로 합쳐서 분석하는 시도들이 이루어졌다. 이러한 음식군은 몇가지 규칙에 대해 34가지, 37가지 26가지 항목으로 합치는 시도들이 있었는데, raw data가 꽤  sparse하기 때문에 가장 군집 개수가 적은 26가지 음식군으로 합쳐서 분석을 수행하였다. 음식군으로 합칠때에는 </span><strong><span>1회 평균 섭취량</span></strong><span>으로 가공을 하기 위해 섭취 빈도에 대한 일단위 기준 비율과 1회 섭취량을 곱한 값을 사용하였다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image.png" referrerpolicy="no-referrer" alt="image.png"></p><p>&nbsp;</p><p><span>또한 이러한 음식 데이터를 바탕으로, 표준 영양성분표를 통해 탄수화물, 단백질, 지방, 무기질, 비타민 등의 영양소 기준으로 변환된 데이터 또한 존재한다. 이러한 음식 데이터는 Log-normal distribution을 따르는 것을 알 수 있었다. Log-normal 분포란, 해당 데이터에 log를 취할 경우 정규분포를 따르는 분포를 뜻한다.  다음은 26개 각 음식군에 대한 섭취량 log 산포도이다. x축은 섭취량의 log값, y축은 hist를 나타내고 있다. 섭취량이 많은 과일, 야채, 생선 등은 확실한 정규분포를 보인다. 하지만 너무 규칙적으로 섭취하는 밥의 경우는 그 분포도가 특정 값에 몰려서 나타나는 것을 살펴 볼 수 있었다. 반대로 그 섭취량을 정확히 측정하기 어려운 유지방이나 견과류, 기타 육류 등은 대부분의 데이터가 0에 수렴하기 때문에, 그 값을 정확하게 살펴 볼 수 없다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/food_distribution_log_v3.png" referrerpolicy="no-referrer" alt="img"></p><h3 id='activity-data'><span>Activity Data</span></h3><p><span>KoGES 데이터에는 Activity에 대한 설문 문항이 존재하지만, 해당 문항을 통해 피험자의 운동량을 정의하는 작업을 수행하진 않았다. 그 대신, 성별, 체중, 신장, 활동 계수를 통해 에너지 필요 추정량(Estimated Energy Requirement, EER)을 계산하였다. 다음은 EER을 계산하는 식이다</span><sup class='md-footnote'><a href='#dfref-footnote-2' name='ref-footnote-2'>2</a></sup><span>.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723220103788-7045265.png" referrerpolicy="no-referrer" alt="image-20210723220103788"></p><h3 id='data-filtering'><span>Data Filtering</span></h3><p><span>안산, 안성 코호트에 대해 1차년도에 10,030의 피험자에 대해서 데이터에 영향을 줄 수 있는 특수한 질병을 앓고 있거나, 당뇨치료를 받거나, 데이터가 누락되는 등에 대한 데이터를 제거하여 최종적으로 6,127명의 피험자를 골라냈다. </span></p><h3 id='dietary-patter-similarity-network'><span>Dietary Patter Similarity Network</span></h3><p><span>피험자들간의 음식 섭취 패턴간 유사도를 피어슨 상관계수를 통해 구하였다. 피험자들 간 섭취 패턴의 유사도를 두 피험자간 연결선의 가중치라고 생각하면, 피험자들 사이의 유사도 네트워크를 구성할 수 있다. 다음은 유사도에 대한 산포도이다. 한국인의 식습관은 쌀밥과 김치, 야채와 과일, 돼지고기와 생선 위주의 식단으로 대략적으로 정형화된 패턴이 있다고 볼 수 있다. 하지만 특정 섭취 패턴과 특정 섭취패턴은 그 유사도가 0으로 측정 될 정도로 비슷하지 않은 식습관 또한 존재한다. </span></p><p><img src="2021_Food_clustering_중간보고.assets/68D038D2-9C24-4371-9828-7124C62ABC7E.png" referrerpolicy="no-referrer" alt="img"></p><p>&nbsp;</p><h2 id='method'><span>Method</span></h2><h3 id='modularity-based-clustering'><span>Modularity-based clustering</span></h3><p><strong><span>모듈성</span></strong><span> (modularity)은 네트워크를 군집(모듈, 그룹, 클러스터 또는 커뮤니티라고도 함)으로 분할하는 강도를 측정하는 네트워크 구조의 척도이다 . 높은 모듈성을 가진 네트워크는 모듈 내의 노드 사이에 조밀한 연결을 갖지만 다른 모듈의 노드 사이의 연결은 희박하다. 모듈성은 네트워크에서 커뮤니티 구조 를 감지하기 위한 최적화 방법에 자주 사용 된다. 동물의 뇌를 포함한 생물학적 네트워크는 높은 수준의 모듈성가지고 있는 것으로 보여 다양한 네트워크에서 사용될 수 있다. 수학적으로 모듈성이란 임의로 만들어진 random network에 비해 우리가 찾은 군집 구조가 얼마나 빽빽하게 연결되어있는지를 뜻한다. 다르게 표현하자면, 네트워크 전체의 연결선이 각 군집 사이의 연결선보다 군집 내부에서의 연결선이 많을 경우 모듈성은 높게 나타난다. 모듈성은 -1에서 1사이의 값을 가질 수 있다. 모듈성을 이용한 네트워크 군집 기법은 다양한 방법론이 있지만, 우리는 그 중 Louvain Algorithm을 사용하였다</span><sup class='md-footnote'><a href='#dfref-footnote-3' name='ref-footnote-3'>3</a></sup><span>. 특히 Louvain Algorithm은 그 계산속도가 빠르며, 각 노드(피험자)를 합쳐가면서 그 군집을 구하기 때문에, 합쳐갈 때 마다의 새로운 군집구조를 통해서 군집 패턴의 계층구조(Hierarchy)까지 알 수 있는 장점이 있다. 군집을 구하기 위한 계산은 python 내의 Scikit-network 패키지를 사용하여 계산하였다</span><sup class='md-footnote'><a href='#dfref-footnote-4' name='ref-footnote-4'>4</a></sup><span>.</span></p><h2 id='supplmentary-material'><span>Supplmentary Material</span></h2><h3 id='baseline-characteristics-2'><span>Baseline characteristics</span></h3><figure><table><thead><tr><th><span>Supplementary Table 1. Baseline characteristics of study  subjects (n=6127).</span></th><th><span>t-test</span></th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr></thead><tbody><tr><td>&nbsp;</td><td><span>Baseline status</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><span>NGT</span></td><td><span>Prediabetes</span></td><td><span>t</span></td><td><span>p</span></td><td><span>χ2 (p)</span></td><td>&nbsp;</td></tr><tr><td><span>Number  of participants (n)</span></td><td><span>3224</span></td><td><span>2903</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Outcome  status</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Non-diabetes,  n (%)</span></td><td><span>3077 (95.4)</span></td><td><span>2267 (78.1)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>412.479* (&lt;0.0001)</span></td><td>&nbsp;</td></tr><tr><td><span>Diabetes,  n (%)</span></td><td><span>147 (4.6)</span></td><td><span>636 (21.9)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Age,  year (mean (sd))</span></td><td><span>49.94</span></td><td><span>52.89</span></td><td><span>-13.529</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>40~49, n  (%)</span></td><td><span>1918 (59.5)</span></td><td><span>1258 (43.3)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>176.152* (&lt;0.0001)</span></td><td>&nbsp;</td></tr><tr><td><span>50~59, n  (%)</span></td><td><span>740 (23.0)</span></td><td><span>808 (27.8)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>60~69, n  (%)</span></td><td><span>566 (17.6)</span></td><td><span>837 (28.8)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Men, n  (%)</span></td><td><span>1604 (49.8)</span></td><td><span>1483 (51.1)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>1.086* (0.297)</span></td><td>&nbsp;</td></tr><tr><td><span>Area</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Ansung  (Rural), n (%)</span></td><td><span>1572 (48.8)</span></td><td><span>1451 (50.0)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>.915* (0.339)</span></td><td>&nbsp;</td></tr><tr><td><span>Ansan  (Urban), n (%)</span></td><td><span>1652 (51.2)</span></td><td><span>1452 (50.0)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Anthropometric  measure</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Height,  cm (mean (sd))</span></td><td><span>160.80</span></td><td><span>160.28</span></td><td><span>2.344</span></td><td><span>.019</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Weight,  cm (mean (sd))</span></td><td><span>62.42</span></td><td><span>64.05</span></td><td><span>-6.310</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>BMI,  kg/m2 (mean (sd))</span></td><td><span>24.08</span></td><td><span>24.89</span></td><td><span>-9.437</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Waist  circumference, cm</span></td><td><span>81.00</span></td><td><span>83.55</span></td><td><span>-11.742</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Hip  circumference, cm (mean (sd))</span></td><td><span>93.00</span></td><td><span>93.94</span></td><td><span>-6.257</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Waist to  Hip Ratio (mean (sd))</span></td><td><span>0.87</span></td><td><span>0.89</span></td><td><span>-9.126</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Smoke</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Never, n  (%)</span></td><td><span>1904 (59.5)</span></td><td><span>1603 (55.6)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>11.874* (0.008)</span></td><td>&nbsp;</td></tr><tr><td><span>Former,  n (%)</span></td><td><span>520 (16.3)</span></td><td><span>489 (17.0)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Current,  n (%)</span></td><td><span>774 (24.2)</span></td><td><span>789 (27.4)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Alcohol</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>User, n  (%)</span></td><td><span>1606 (50.0)</span></td><td><span>1477 (51.1)</span></td><td>&nbsp;</td><td>&nbsp;</td><td><span>3.910* (0.142)</span></td><td>&nbsp;</td></tr><tr><td><span>Non-user,  n (%)</span></td><td><span>1609 (50.0)</span></td><td><span>1411 (48.9)</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Systolic  Blood Pressure, mmHg</span></td><td><span>465.66</span></td><td><span>267.40</span></td><td><span>2.252</span></td><td><span>.024</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Diastolic  Blood Pressure, mmHg</span></td><td><span>425.48</span></td><td><span>225.03</span></td><td><span>2.276</span></td><td><span>.023</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Laboratory  finding</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HbA1c,  % (mean (sd))</span></td><td><span>5.32</span></td><td><span>5.78</span></td><td><span>-66.678</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Fasting  glucose, mg/dL (mean (sd))</span></td><td><span>80.59</span></td><td><span>85.76</span></td><td><span>-24.185</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Fasting  insulin, µIU/ml (mean (sd))</span></td><td><span>7.30</span></td><td><span>7.71</span></td><td><span>-3.591</span></td><td><span>&lt;0.001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>BUN,  mg/dL (mean (sd))</span></td><td><span>14.02</span></td><td><span>14.54</span></td><td><span>-5.797</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Creatinine,  mg/dL (mean (sd))</span></td><td><span>0.84</span></td><td><span>0.85</span></td><td><span>-2.616</span></td><td><span>.009</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>eGFR,  ml/min per 1.73 m2 (mean (sd))</span></td><td><span>94.07</span></td><td><span>91.07</span></td><td><span>8.452</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Total  cholesterol, mg/dL (mean (sd))</span></td><td><span>184.99</span></td><td><span>195.48</span></td><td><span>-12.117</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>LDL,  mg/dL (mean (sd))</span></td><td><span>111.29</span></td><td><span>110.09</span></td><td><span>.183</span></td><td><span>.855</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HDL,  mg/dL (mean (sd))</span></td><td><span>45.16</span></td><td><span>44.41</span></td><td><span>2.979</span></td><td><span>.003</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Triglyceride,  mg/dL (mean (sd))</span></td><td><span>142.85</span></td><td><span>170.72</span></td><td><span>-11.026</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Insulin resistance index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-IR  (mean (sd))</span></td><td><span>1.46</span></td><td><span>1.64</span></td><td><span>-7.642</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>QUICKI  (mean (sd))</span></td><td><span>0.38</span></td><td><span>0.37</span></td><td><span>5.681</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>Insulin secretion index</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><span>HOMA-β (mean (sd))</span></td><td><span>175.24</span></td><td><span>146.23</span></td><td><span>7.402</span></td><td><span>&lt;0.0001</span></td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><p><span> </span></p><h3 id='eer-and-total-calories'><span>EER and Total Calories</span></h3><p><span>에너지 섭취 요구량의 계산결과는 대략 2000kcal 전후로 나타난다. 하지만 실제 피험자들의 설문조사를 통한 섭취 총 칼로리는 거의 섭취를 안하는 피험자부터, 10000kcal에 달하는 피험자 까지 다양한 데이터가 존재한다. 따라서 두 항목을 비교하여 필요 에너지 대비 섭취량이라는 새로운 항목을 만들어 내기에는 무리가 있다고 생각하였다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723234516853.png" referrerpolicy="no-referrer" alt="img"></p><h3 id='bmi-vs-total-energy'><span>BMI vs Total Energy</span></h3><p><span>에너지 섭취량 대비 BMI, 몸무게, 신장 등을 비교해봤을 때, 특정한 선형 관계같은 것이 나타나지 않았다. 또한 BMI의 기준으로 비만과 정상을 나눴을 때 정상범위에 속하더라도 고칼로리를 섭취하는 사람들이 많이 존재했다. KoGES 데이터 자체가 40세 이상의 성인들에 대해 추적조사를 한 것으로 살펴봤을 때 해석하기 어려운 정보를 담고 있었다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210723234842890.png" referrerpolicy="no-referrer" alt="image.png"></p><h3 id='prevalence-of-major-cluster'><span>Prevalence of major cluster</span></h3><p><span>다음은 모듈성을 이용해 찾은 군집 들 중 n수가 100 이상인 주요 군집들에 대한 유병률을 나타낸 그래프이다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/22BD4500-5C27-4FD1-A868-0761B83B991F.png" referrerpolicy="no-referrer" alt="img"></p><h3 id='results-of-autoencoder'><span>Results of AutoEncoder</span></h3><p><span>AE(AutoEncoder)는 manifold learning을 목적으로 할 수 있는 dimension reduction을 위해 쓰이는 신경망(neural network) 모형 중 하나이다. AE모델은 인공 신경망을 통해 데이터에 숨겨진 패턴을 찾는 목적으로 사용된다. Encoder를 통해 숨겨진 패턴(code)으로 압축하고, code에서 decoder를 통해 원래의 데이터 x와 같은 패턴을 다시 만들어내고자 하는것이 AE의 목표이다. 압축된 code가 원 데이터 x의 정보를 모두 담고 있다면, decoder를 통해 다시 만들어진 정보는 원데이터와 동일할 수 있다는 가정을 하고 있다. 따라서 AE는 원데이터와 재구성된 데이터의 차이를 오차(loss 또는 cost)로 표현한다. AE를 이용한 모델에 대한 결과는 다음과 같다. 먼저 MSE에 대한 loss는 다음과 같다. Loss는 MSE(mean square error)를 사용했다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/CEB5B551-FCC6-4D73-A9A8-EA2E9E9863FD.png" referrerpolicy="no-referrer" alt="img"></p><p><span>아래는 각 피험자의 섭취 패턴(+)을 AE를 통해 다시 만들어낸 데이터(x)와 비교하였다. 섭취 패턴에 대한 Global Information은 잘 학습해서 주요 섭취량들은 잘 맞추는 것을 확인 할 수 있었다. 하지만 섭취량이 비교적 작은 값들에 대해서는 잘 맞추지 못하는 것을 볼 수 있다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210724005551963-7055753.png" referrerpolicy="no-referrer" alt="image-20210724005551963"></p><p><span>또한, 아쉽게도 임베딩된 code에서 당뇨와 정상인사이에 유의미한 차이가 보여지진 않는다. 이는 다시말해서 AE가 global information은 어느정도 학습 했지만, 당뇨의 유병률에 유의미한 차이를 가져올 수 있는 micro information에 대한 차이를 제대로 학습하지 못했다는 것을 볼 수 있다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210724005403518.png" referrerpolicy="no-referrer" alt="image-20210724005403518"></p><h3 id='results-of-variational-autoencoder'><span>Results of Variational AutoEncoder</span></h3><p><span>VAE는 AE의 latent vector가 Gaussian distribution을 따르게끔 하는 제약조건을 통해 좀 더 성능을 높인 모델이다. 또한 input과 output에서 확률분포를 사용하기 때문에 loss에서 BCE (binary cross entropy)와 KLD (Kullback–Leibler divergence)를 사용한다. 이는 수학적인 유도를 통해 얻어질 수 있다. VAE에서는 확률을 사용해야하기 때문에, input에 전처리를 통해 0~1사이의 값을 가지는 섭취량에 대한 표준점수를 넣어주었다. 충분히 학습된 모델을 통해 예측한 결과에서는 표준화 된 점수 때문에 global information이 사라졌기 때문에 global information과 micro information 모두 학습하지 못하는 것 같은 결과를 얻었다.</span></p><p><img src="2021_Food_clustering_중간보고.assets/image-20210724011036252.png" referrerpolicy="no-referrer" alt="image-20210724011036252"></p><div class='footnotes-area'  ><hr/>
-<div class='footnote-line'><span class='md-fn-count'>1</span> <span>J. E., Lee, et al. &quot;Dietary pattern classifications with nutrient intake and health-risk factors in Korean men.&quot; </span><em><span>Nutrition</span></em><span> 27.1 (2011): 26-33.</span> <a name='dfref-footnote-1' href='#ref-footnote-1' title='back to document' class='reversefootnote' >↩</a></div>
-<div class='footnote-line'><span class='md-fn-count'>2</span> <span>2020 KDRI(한국인 영양소 섭취 기준)의 에너지필요추정량(EER) 산출공식</span> <a name='dfref-footnote-2' href='#ref-footnote-2' title='back to document' class='reversefootnote' >↩</a></div>
-<div class='footnote-line'><span class='md-fn-count'>3</span> <span>Blondel, Vincent D., et al. &quot;Fast unfolding of communities in large networks Journal of Statistical Mechanics: Theory and Experiment 2008.&quot; </span><em><span>P10008</span></em><span> (2008).</span> <a name='dfref-footnote-3' href='#ref-footnote-3' title='back to document' class='reversefootnote' >↩</a></div>
-<div class='footnote-line'><span class='md-fn-count'>4</span> <span>Bonald, Thomas, et al. &quot;Scikit-network: Graph Analysis in Python.&quot; </span><em><span>J. Mach. Learn. Res.</span></em><span> 21 (2020): 185-1.</span> <a name='dfref-footnote-4' href='#ref-footnote-4' title='back to document' class='reversefootnote' >↩</a></div></div></div></div>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-inner comment-enabled" data-hard-breaks="true"><h1 id="Dietary-Pattern-Clustering-with-diabetes" data-id="Dietary-Pattern-Clustering-with-diabetes"><a class="anchor hidden-xs" href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary-Pattern-Clustering-with-diabetes"><span class="octicon octicon-link"></span></a><span>Dietary Pattern Clustering with diabetes</span></h1><ul>
+<li><span>presentation for RHINO2021(2021.08.17 ~ 19), Young Jin Kim(</span><a href="mailto:kimyoungjin06@gmail.com" target="_blank" rel="noopener"><span>kimyoungjin06@gmail.com</span></a><span>)</span></li>
+</ul><h6 id="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder" data-id="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder"><a class="anchor hidden-xs" href="#tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder" title="tags-network-clustering-modularity-dietary-pattern-diabetes-manifold-learning-auto-encoder"><span class="octicon octicon-link"></span></a><span>tags: </span><code>network</code><span> </span><code>clustering</code><span> </span><code>modularity</code><span> </span><code>dietary pattern</code><span> </span><code>diabetes</code><span> </span><code>manifold learning</code><span> </span><code>auto encoder</code></h6><p><span class="toc"><ul>
+<li><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul>
+<li><a href="#Highlight" title="Highlight">Highlight</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul>
+<li><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
+<li><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
+<li><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
+<li><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
+</ul>
+</li>
+<li><a href="#Method" title="Method">Method</a><ul>
+<li><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
+</ul>
+</li>
+<li><a href="#Result" title="Result">Result</a><ul>
+<li><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
+<li><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
+<li><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
+</ul>
+</li>
+<li><a href="#Discussion" title="Discussion">Discussion</a></li>
+<li><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
+</ul>
+</li>
+</ul>
+</span></p><h2 id="Highlight" data-id="Highlight"><a class="anchor hidden-xs" href="#Highlight" title="Highlight"><span class="octicon octicon-link"></span></a><span>Highlight</span></h2><ul>
+<li><span>We find more healthy/critical dietary pattern for diabetes.</span></li>
+<li><span>Daily food intake follows log-normal distribution.</span></li>
+<li><span>Modularity-based clustering catch the micro difference of dietary pattern.</span></li>
+<li><span>Machine learning algorithms (including neural network model: Auto Encoder and Variational Auto Encoder) don’t catch the micro difference and just learned global pattern (AE).</span></li>
+<li><span>Fig. S1에서 group size distribution 끝까지 그려보기</span></li>
+</ul><h2 id="Introduction" data-id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><span class="octicon octicon-link"></span></a><span>Introduction</span></h2><p><span>Diabetes is one of the most prominent diseases in the 21st century. Not only are there statistical surveys with prevalence rates of around 10% in the world including Korea. The dietary pattern is one of the important factors for the progress of diabetes. We want to find specific dietary patterns more critical to diabetes in KoGES data. We apply the network clustering method and manifold learning like the autoencoder to dietary patterns of Korean and find some micro clusters more critical or healthy for diabetes.</span></p><h2 id="Data-KoGES" data-id="Data-KoGES"><a class="anchor hidden-xs" href="#Data-KoGES" title="Data-KoGES"><span class="octicon octicon-link"></span></a><span>Data: KoGES</span></h2><h3 id="Korean-Genome-and-Epidemiology-Study" data-id="Korean-Genome-and-Epidemiology-Study"><a class="anchor hidden-xs" href="#Korean-Genome-and-Epidemiology-Study" title="Korean-Genome-and-Epidemiology-Study"><span class="octicon octicon-link"></span></a><span>Korean Genome and Epidemiology Study</span></h3><p><span>KoGES(Korean Genome and Epidemiology Study) is one of biggest data-driven bio-project in Korea </span><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup><span>. The KoGES collects epidemiological data and biospecimen, such as blood, urine, and genome from large scale cohort of 40-69 years old by conducting </span><strong><span>medical examination</span></strong><span> and </span><strong><span>health survey</span></strong><span>.</span></p><p><span>In the KoGES, we use one of population-based study “Ansan and Ansung Cohort”</span></p><ul>
+<li><span>Men and women living in Ansan (industrialized community) and Ansung (rural area) aged 40–69 years</span></li>
+<li><span>10,030 baseline participants (Ansan: 5,012 Ansung: 5,018)</span></li>
+<li><span>8th follow-up from 2001 to 2018 per 2 years</span></li>
+</ul><h3 id="Dietary-pattern" data-id="Dietary-pattern"><a class="anchor hidden-xs" href="#Dietary-pattern" title="Dietary-pattern"><span class="octicon octicon-link"></span></a><span>Dietary pattern</span></h3><p><span>In this study, we only focus on the dietary pattern. Our hypothesis is it like a famous movie quotes. We suppose that the dietary pattern embraces ones eating, living, and exercise pattern and other  all of ones life to exaggerate.</span></p><blockquote>
+<p><span>“Manners maketh man” </span><small><i class="fa fa-user"></i> Harry, Kingsman(2015)</small></p>
+</blockquote><p><span>The dietary pattern of the KoGES is made by a survey of the intake and frequency (average in last a year) of the typical food in Korea. The typical foods in survey are 100s. We grouped these foods to 26 represent food groups</span><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><span>. We estimate daily intake of each food group by the survey and make dietary pattern of each patient.</span></p><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="Food distribution" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure1. Food distribution in the baseline. The intake of each food follow a log-normal distribution. The number of bins is 9 and the frequency line is smoothen with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-20-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-130" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-131" class="mjx-mrow"><span id="MJXc-Node-132" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-133" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-134" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-20">\sigma=1</script></span><span>​.​ The non-intake food isn’t counted.</span></td>
+</tr>
+</tbody>
+</table><p><span>The KoGES dataset contains some anthropometric data like Body Mass Index(BMI). Figure 2 shows correlations between total energy and anthropometric data, and the correlations are not significant. The total energy is estimated using the dietary pattern and national standard ingredients of food. So, there are anomaly data point (almost zero-calories or nearby 10,000 Kcal) in estimated total energy using survey.</span></p><table>
+<thead>
+<tr>
+<th><img src="" alt="anthropometric data" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>Figure 2. The correlation of total energy and anthropometric data. The blue(green) circle is normal subject (diabetes mellitus) and black dashed line is frequency of total energy. (d-f) show some results from Inbody(3.0) - </span><strong><span>(d)</span></strong><span> BDCMSC(amount of muscle), </span><strong><span>(e)</span></strong><span> BDFTR(body fat ratio), and </span><strong><span>(f)</span></strong><span> ABFTR(abdomen fat ratio).</span></td>
+</tr>
+</tbody>
+</table><h3 id="Definition-of-diabetes-and-prediabetes" data-id="Definition-of-diabetes-and-prediabetes"><a class="anchor hidden-xs" href="#Definition-of-diabetes-and-prediabetes" title="Definition-of-diabetes-and-prediabetes"><span class="octicon octicon-link"></span></a><span>Definition of diabetes and prediabetes</span></h3><p><span>Incident Diabetes Mellitus (DM) was defined as self-reported physician-diagnosed diabetes and/or subjects with current treatment for diabetes (i.e. oral agents and/or insulin) and/or current American Diabetes Association (ADA) guidelines: a fasting glucose concentration ≥126mg/dL or a post 2-h glucose during 75g oral glucose tolerance test (OGTT) of ≥200mg/dL, or HbA1c of ≥6.5% </span><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup><span>. Subjects with prediabetes were also defined by ADA guidelines: the presence of impaired fasting glucose (IFG) and/or impaired glucose tolerance (IGT) and/or HbA1c 5.7-6.4%. IFG is defined as fasting glucose concentration between 100 and 125mg/dL </span><sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup><sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup><span> and IGT as post 2-h glucose during 75g OGTT levels between 140 and 199mg/dL </span><sup class="footnote-ref"><a href="#fn4" id="fnref4:1">[4:1]</a></sup><span>.</span></p><h3 id="CONSORT-flow-diagram" data-id="CONSORT-flow-diagram"><a class="anchor hidden-xs" href="#CONSORT-flow-diagram" title="CONSORT-flow-diagram"><span class="octicon octicon-link"></span></a><span>CONSORT flow diagram</span></h3><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="CONSORT_flow_diagram" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 3. CONSORT flow diagram. We focus on 6,127 non-diabetes subjects in baseline. 12.8% of these subjects got the diabetes in outcome.</span></td>
+</tr>
+</tbody>
+</table><h2 id="Method" data-id="Method"><a class="anchor hidden-xs" href="#Method" title="Method"><span class="octicon octicon-link"></span></a><span>Method</span></h2><h3 id="Modularity-based-clustering" data-id="Modularity-based-clustering"><a class="anchor hidden-xs" href="#Modularity-based-clustering" title="Modularity-based-clustering"><span class="octicon octicon-link"></span></a><span>Modularity-based clustering</span></h3><p><span>Modularity is a measurement of network structure. It means strength of module structure (group, community, or cluster). A network with high modularity has dense internal connection in each module and sparse external connection. The modularity </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-18-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>Q</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-78" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-79" class="mjx-mrow"><span id="MJXc-Node-80" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.445em;">Q</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi></math></span></span><script type="math/tex" id="MathJax-Element-18">Q</script></span><span>​ defined the relative internal edge density versus given random network.</span><br>
+<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="mjx-chtml MJXc-display" style="text-align: center;"><span id="MathJax-Element-19-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>Q</mi><mo>=</mo><mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;><mfrac><mn>1</mn><mi>w</mi></mfrac></mstyle><munder><mo>&amp;#x2211;</mo><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder><mrow><mo>(</mo><msub><mi>A</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>i</mi><mi>j</mi></mrow></msub><mo>&amp;#x2212;</mo><mi>&amp;#x03B3;</mi><mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;><mfrac><mrow><msub><mi>d</mi><mi>i</mi></msub><msub><mi>d</mi><mi>j</mi></msub></mrow><mi>w</mi></mfrac></mstyle><mo>)</mo></mrow><msub><mi>&amp;#x03B4;</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><msub><mi>c</mi><mi>j</mi></msub></mrow></msub></math>" role="presentation" style="font-size: 113%; text-align: center; position: relative;"><span id="MJXc-Node-81" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-82" class="mjx-mrow"><span id="MJXc-Node-83" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.445em;">Q</span></span><span id="MJXc-Node-84" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-85" class="mjx-mstyle MJXc-space3"><span id="MJXc-Node-86" class="mjx-mrow"><span id="MJXc-Node-87" class="mjx-mfrac"><span class="mjx-box MJXc-stacked" style="width: 0.916em; padding: 0px 0.12em;"><span class="mjx-numerator" style="width: 0.916em; top: -1.368em;"><span id="MJXc-Node-88" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span><span class="mjx-denominator" style="width: 0.916em; bottom: -0.722em;"><span id="MJXc-Node-89" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">w</span></span></span><span class="mjx-line" style="border-bottom: 1.3px solid; top: -0.285em; width: 0.916em;"></span></span><span class="mjx-vsize" style="height: 2.089em; vertical-align: -0.722em;"></span></span></span></span><span id="MJXc-Node-90" class="mjx-munderover MJXc-space1"><span class="mjx-itable"><span class="mjx-row"><span class="mjx-cell"><span class="mjx-op"><span id="MJXc-Node-91" class="mjx-mo"><span class="mjx-char MJXc-TeX-size2-R" style="padding-top: 0.722em; padding-bottom: 0.722em;">∑</span></span></span></span></span><span class="mjx-row"><span class="mjx-under" style="font-size: 70.7%; padding-top: 0.236em; padding-bottom: 0.141em; padding-left: 0.504em;"><span id="MJXc-Node-92" class="mjx-texatom" style=""><span id="MJXc-Node-93" class="mjx-mrow"><span id="MJXc-Node-94" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span><span id="MJXc-Node-95" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.163em; padding-bottom: 0.556em;">,</span></span><span id="MJXc-Node-96" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.501em;">j</span></span></span></span></span></span></span></span><span id="MJXc-Node-97" class="mjx-mrow MJXc-space1"><span id="MJXc-Node-98" class="mjx-mo"><span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.22em; padding-bottom: 1.22em;">(</span></span><span id="MJXc-Node-99" class="mjx-msubsup"><span class="mjx-base"><span id="MJXc-Node-100" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.279em;">A</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-101" class="mjx-texatom" style=""><span id="MJXc-Node-102" class="mjx-mrow"><span id="MJXc-Node-103" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span><span id="MJXc-Node-104" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.501em;">j</span></span></span></span></span></span><span id="MJXc-Node-105" class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.445em;">−</span></span><span id="MJXc-Node-106" class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.501em; padding-right: 0.025em;">γ</span></span><span id="MJXc-Node-107" class="mjx-mstyle"><span id="MJXc-Node-108" class="mjx-mrow"><span id="MJXc-Node-109" class="mjx-mfrac"><span class="mjx-box MJXc-stacked" style="width: 1.846em; padding: 0px 0.12em;"><span class="mjx-numerator" style="width: 1.846em; top: -1.514em;"><span id="MJXc-Node-110" class="mjx-mrow"><span id="MJXc-Node-111" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.003em;"><span id="MJXc-Node-112" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-113" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span><span id="MJXc-Node-114" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.003em;"><span id="MJXc-Node-115" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-116" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.501em;">j</span></span></span></span></span></span><span class="mjx-denominator" style="width: 1.846em; bottom: -0.722em;"><span id="MJXc-Node-117" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">w</span></span></span><span class="mjx-line" style="border-bottom: 1.3px solid; top: -0.285em; width: 1.846em;"></span></span><span class="mjx-vsize" style="height: 2.236em; vertical-align: -0.722em;"></span></span></span></span><span id="MJXc-Node-118" class="mjx-mo"><span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.22em; padding-bottom: 1.22em;">)</span></span></span><span id="MJXc-Node-119" class="mjx-msubsup MJXc-space1"><span class="mjx-base" style="margin-right: -0.007em;"><span id="MJXc-Node-120" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.279em; padding-right: 0.007em;">δ</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-121" class="mjx-texatom" style=""><span id="MJXc-Node-122" class="mjx-mrow"><span id="MJXc-Node-123" class="mjx-msubsup"><span class="mjx-base"><span id="MJXc-Node-124" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">c</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-125" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span><span id="MJXc-Node-126" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.163em; padding-bottom: 0.556em;">,</span></span><span id="MJXc-Node-127" class="mjx-msubsup"><span class="mjx-base"><span id="MJXc-Node-128" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">c</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-129" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.501em;">j</span></span></span></span></span></span></span></span></span></span><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Q</mi><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mi>w</mi></mfrac></mstyle><munder><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder><mrow><mo>(</mo><msub><mi>A</mi><mrow class="MJX-TeXAtom-ORD"><mi>i</mi><mi>j</mi></mrow></msub><mo>−</mo><mi>γ</mi><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><msub><mi>d</mi><mi>i</mi></msub><msub><mi>d</mi><mi>j</mi></msub></mrow><mi>w</mi></mfrac></mstyle><mo>)</mo></mrow><msub><mi>δ</mi><mrow class="MJX-TeXAtom-ORD"><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><msub><mi>c</mi><mi>j</mi></msub></mrow></msub></math></span></span></span><script type="math/tex; mode=display" id="MathJax-Element-19">
+Q = \dfrac{1}{w} \sum_{i,j}\left(A_{ij} - \gamma \dfrac{d_id_j}{w}\right)\delta_{c_i,c_j}
+</script></span><br>
+<span>where</span></p><ul>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-11-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>c</mi><mi>i</mi></msub></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-47" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-48" class="mjx-mrow"><span id="MJXc-Node-49" class="mjx-msubsup"><span class="mjx-base"><span id="MJXc-Node-50" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">c</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-51" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>c</mi><mi>i</mi></msub></math></span></span><script type="math/tex" id="MathJax-Element-11">c_i</script></span><span> is the cluster of node </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-12-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>i</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-52" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-53" class="mjx-mrow"><span id="MJXc-Node-54" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-12">i</script></span><span>,</span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-13-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>d</mi><mi>i</mi></msub></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-55" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-56" class="mjx-mrow"><span id="MJXc-Node-57" class="mjx-msubsup"><span class="mjx-base" style="margin-right: -0.003em;"><span id="MJXc-Node-58" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span id="MJXc-Node-59" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>d</mi><mi>i</mi></msub></math></span></span><script type="math/tex" id="MathJax-Element-13">d_i</script></span><span> is the weight of node </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-14-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>i</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-60" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-61" class="mjx-mrow"><span id="MJXc-Node-62" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-14">i</script></span><span>,</span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-15-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>w</mi><mo>=</mo><msup><mn>1</mn><mi>T</mi></msup><mi>A</mi><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-63" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-64" class="mjx-mrow"><span id="MJXc-Node-65" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">w</span></span><span id="MJXc-Node-66" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-67" class="mjx-msubsup MJXc-space3"><span class="mjx-base"><span id="MJXc-Node-68" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-69" class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.12em;">T</span></span></span></span><span id="MJXc-Node-70" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.279em;">A</span></span><span id="MJXc-Node-71" class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>w</mi><mo>=</mo><msup><mn>1</mn><mi>T</mi></msup><mi>A</mi><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-15">w = 1^TA1</script></span><span> is the total weight of the graph,</span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-16-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03B4;</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-72" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-73" class="mjx-mrow"><span id="MJXc-Node-74" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.501em; padding-bottom: 0.279em; padding-right: 0.007em;">δ</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>δ</mi></math></span></span><script type="math/tex" id="MathJax-Element-16">\delta</script></span><span> is the Kronecker symbol,</span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-17-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03B3;</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-75" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-76" class="mjx-mrow"><span id="MJXc-Node-77" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.501em; padding-right: 0.025em;">γ</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>γ</mi></math></span></span><script type="math/tex" id="MathJax-Element-17">\gamma</script></span><span> is the resolution parameter.</span></li>
+</ul><p><span>We use Louvain algorithm to measure modularity </span><sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup><span>. This algorithm has advantage with fast calculation and hierarchy. The algorithm merge a node set in a community to a node in each step, so it can obtain the  hierarchy of given network. We user a python package </span><code>scikit-network</code><span> to use Louvain algorithm </span><sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup><span>.</span></p><h2 id="Result" data-id="Result"><a class="anchor hidden-xs" href="#Result" title="Result"><span class="octicon octicon-link"></span></a><span>Result</span></h2><h3 id="Hierarchical-cluster" data-id="Hierarchical-cluster"><a class="anchor hidden-xs" href="#Hierarchical-cluster" title="Hierarchical-cluster"><span class="octicon octicon-link"></span></a><span>Hierarchical cluster</span></h3><p><span>We obtain hierarchy structure of clusters using Louvain algorithm. In low level (lv1), there is not obvious risky/healthy cluster. In more deep stage (lv2~), risky/healthy cluster is appeared (Figure 4).</span></p><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 4. Hierarchy of clustering with Louvain algorithm. Each node means a cluster in hierarchy upto lv6. The cluster appears when it contains more than 30 subjects. The size of node means number of cluster and color means diabetes mellitus prevalence(%) in future. The total subject is 6,127.</span></td>
+</tr>
+</tbody>
+</table><ul>
+<li><span>More interactive visualizations</span></li>
+</ul><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="sunburst" loading="lazy"></th>
+<th style="text-align:center"><img src="" alt="treemap" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="" target="_blank" rel="noopener"><span>sunburst</span></a></td>
+<td style="text-align:center"><a href="" target="_blank" rel="noopener"><span>treemap</span></a></td>
+</tr>
+</tbody>
+</table><h3 id="Details-in-micro-clusters-lv4" data-id="Details-in-micro-clusters-lv4"><a class="anchor hidden-xs" href="#Details-in-micro-clusters-lv4" title="Details-in-micro-clusters-lv4"><span class="octicon octicon-link"></span></a><span>Details in micro clusters (lv4)</span></h3><p><span>We examine typical micro clusters in lv4. The characteristic dietary pattern appear in micro(small) cluster remarkably. Figure 5 shows dietary patterns of top-3 risky/healthy clusters in lv4. The original data doesn’t show any correlation with DM, but the obtained cluster by dietary pattern has significant difference in DM prevalence. It means the modularity-based hierarchical clustering  understand the micro information underlying structure of similarity network of dietary pattern. Figure 6 shows the major nutrition intake of each cluster. The DM subjects are not ‘heavy eater’, rather than they eat less. Especially, they mainly eat carbohydrate.</span></p><h4 id="Dietary-patterns-of-typical-micro-cluster" data-id="Dietary-patterns-of-typical-micro-cluster"><a class="anchor hidden-xs" href="#Dietary-patterns-of-typical-micro-cluster" title="Dietary-patterns-of-typical-micro-cluster"><span class="octicon octicon-link"></span></a><span>Dietary patterns of typical micro cluster</span></h4><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="Figure._DM_high_and_low_risk_food_groups" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 5. Dietary patterns of typical micro cluster in lv4. The color means diabetes mellitus prevalence. Each food score means standardized score with </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-10-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>&amp;#x03C3;</mi><mo>=</mo><mn>1</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-38" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-39" class="mjx-mrow"><span id="MJXc-Node-40" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-41" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-42" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span><span id="MJXc-Node-43" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.163em; padding-bottom: 0.556em;">,</span></span><span id="MJXc-Node-44" class="mjx-mi MJXc-space1"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em; padding-right: 0.001em;">σ</span></span><span id="MJXc-Node-45" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-46" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">1</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mo>=</mo><mn>3</mn><mo>,</mo><mi>σ</mi><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-10">m=3, \sigma=1</script></span><span>. These clusters are top-3 risky/healthy clusters contains more than 100 subjects.</span></td>
+</tr>
+</tbody>
+</table><h4 id="Major-nutrition-intake" data-id="Major-nutrition-intake"><a class="anchor hidden-xs" href="#Major-nutrition-intake" title="Major-nutrition-intake"><span class="octicon octicon-link"></span></a><span>Major nutrition intake</span></h4><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="Nutrition intake boxplot" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 6. Major nutrition intake. The healthy (C3, C13, and C15) clusters absorb more calories (especially the form of fat), and the risky clusters absorb more energy from carbohydrate. **The whisker is 1.5.</span></td>
+</tr>
+</tbody>
+</table><h3 id="Manifold-learning-Auto-Encoder" data-id="Manifold-learning-Auto-Encoder"><a class="anchor hidden-xs" href="#Manifold-learning-Auto-Encoder" title="Manifold-learning-Auto-Encoder"><span class="octicon octicon-link"></span></a><span>Manifold learning: Auto Encoder</span></h3><p><span>Auto Encoder is one of manifold learning model to reduce dimension using neural network. The AE is designed to find hidden structure of data. The AE has two main parts: encoder and decoder. The encoder maps the original data </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-3-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>x</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-13" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-14" class="mjx-mrow"><span id="MJXc-Node-15" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script type="math/tex" id="MathJax-Element-3">x</script></span><span>​ to code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-4-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-16" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-17" class="mjx-mrow"><span id="MJXc-Node-18" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-4">h</script></span><span> (reduced hidden structure) and the decoder maps the code </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-5-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-19" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-20" class="mjx-mrow"><span id="MJXc-Node-21" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">h</script></span><span> to re-construction of input </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-6-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-22" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-23" class="mjx-mrow"><span id="MJXc-Node-24" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-25" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-26" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-6">x'</script></span><span>​. If </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-7-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-27" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-28" class="mjx-mrow"><span id="MJXc-Node-29" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">h</script></span><span> contains all information of original data, it can construct </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-8-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>x</mi><mo>&amp;#x2032;</mo></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-30" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-31" class="mjx-mrow"><span id="MJXc-Node-32" class="mjx-msup"><span class="mjx-base"><span id="MJXc-Node-33" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">x</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-34" class="mjx-mo" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.279em; padding-bottom: 0.335em;">′</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mo>′</mo></msup></math></span></span><script type="math/tex" id="MathJax-Element-8">x'</script></span><span> from </span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-9-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>h</mi></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-35" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-36" class="mjx-mrow"><span id="MJXc-Node-37" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">h</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">h</script></span><span>​​.</span></p><p><span>We design structure of the AE with 4 hidden layers (26-12-6-</span><strong><span>3</span></strong><span>-6-12-26). The reduced dimension is 3. In our study, the AE just learned only global information.</span></p><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="AE_decoded" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 7. Snapshots of original dietary pattern and decoded pattern using Auto Encoder. The loss function is Mean Square Error. The AE learn global(macro) information about food absorbing. It predict major food accurately. But the AE cannot catch micro information about difference.</span></td>
+</tr>
+</tbody>
+</table><p><span>The embeded code doesn’t show difference between DM and non-DM clearly. In other words, AE learn global information to some extent. But the micro information, which can make remarkable difference in DM prevalence, isn’t learned enough.</span></p><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="AE_encoded" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure 8. Embeded code(</span><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-2-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-6" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-7" class="mjx-mrow"><span id="MJXc-Node-8" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em; padding-right: 0.003em;">d</span></span><span id="MJXc-Node-9" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.445em; padding-bottom: 0.279em;">i</span></span><span id="MJXc-Node-10" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.279em;">m</span></span><span id="MJXc-Node-11" class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.058em; padding-bottom: 0.335em;">=</span></span><span id="MJXc-Node-12" class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.39em;">3</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mi>i</mi><mi>m</mi><mo>=</mo><mn>3</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">dim=3</script></span><span>) obtained by Auto Encoder from dietary pattern. The blue(orange) circle means normal subject(diabetes mellitus). The graphs of diagonal parts is histogram of each embeded dimension.</span></td>
+</tr>
+</tbody>
+</table><h2 id="Discussion" data-id="Discussion"><a class="anchor hidden-xs" href="#Discussion" title="Discussion"><span class="octicon octicon-link"></span></a><span>Discussion</span></h2><ul>
+<li><span>Is this valid to determine a set of micro(?) cluster with different levels (not overlapped)?</span></li>
+<li><span>Is this valid statistically?</span></li>
+<li><span>Is it possible to train the machine learning model or neural network model?</span></li>
+</ul><hr><h2 id="Supplementary-Material" data-id="Supplementary-Material"><a class="anchor hidden-xs" href="#Supplementary-Material" title="Supplementary-Material"><span class="octicon octicon-link"></span></a><span>Supplementary Material</span></h2><h4 id="Table1-The-baseline-characteristics-for-each-typical-micro-cluster" data-id="Table1-The-baseline-characteristics-for-each-typical-micro-cluster"><a class="anchor hidden-xs" href="#Table1-The-baseline-characteristics-for-each-typical-micro-cluster" title="Table1-The-baseline-characteristics-for-each-typical-micro-cluster"><span class="octicon octicon-link"></span></a><span>Table1. The baseline characteristics for each typical micro cluster</span></h4><table>
+<thead>
+<tr>
+<th></th>
+<th><span>High risk group</span></th>
+<th></th>
+<th></th>
+<th><span>Low risk group</span></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><span>C10</span></strong></td>
+<td><strong><span>C11</span></strong></td>
+<td><strong><span>C12</span></strong></td>
+<td><strong><span>C3</span></strong></td>
+<td><strong><span>C13</span></strong></td>
+<td><strong><span>C15</span></strong></td>
+</tr>
+<tr>
+<td><span>Number  of participants (n)</span></td>
+<td><span>127</span></td>
+<td><span>118</span></td>
+<td><span>109</span></td>
+<td><span>213</span></td>
+<td><span>107</span></td>
+<td><span>102</span></td>
+</tr>
+<tr>
+<td><span>NGT, n  (%)</span></td>
+<td><span>60 (47.2)</span></td>
+<td><span>52 (44.1)</span></td>
+<td><span>48 (44.0)</span></td>
+<td><span>123 (57.7)</span></td>
+<td><span>57 (53.3)</span></td>
+<td><span>64 (62.7)</span></td>
+</tr>
+<tr>
+<td><span>Prediabetes,  n (%)</span></td>
+<td><span>67 (52.8)</span></td>
+<td><span>66 (55.9)</span></td>
+<td><span>61 (56.0)</span></td>
+<td><span>90 (42.3)</span></td>
+<td><span>50 (46.7)</span></td>
+<td><span>38 (37.3)</span></td>
+</tr>
+<tr>
+<td><span>Age,  year (mean (sd))</span></td>
+<td><span>54.38 (8.96)</span></td>
+<td><span>54.81 (9.31)</span></td>
+<td><span>50.71 (8.76)</span></td>
+<td><span>50.84 (8.51)</span></td>
+<td><span>53.13 (8.66)</span></td>
+<td><span>51.26 (8.36)</span></td>
+</tr>
+<tr>
+<td><span>40~49, n  (%)</span></td>
+<td><span>47 (37.01)</span></td>
+<td><span>41 (34.75)</span></td>
+<td><span>63 (57.80)</span></td>
+<td><span>101 (47.42)</span></td>
+<td><span>37 (34.58)</span></td>
+<td><span>48 (47.06)</span></td>
+</tr>
+<tr>
+<td><span>50~59, n  (%)</span></td>
+<td><span>30 (23.62)</span></td>
+<td><span>26 (22.03)</span></td>
+<td><span>17 (15.60)</span></td>
+<td><span>45 (21.13)</span></td>
+<td><span>32 (29.91)</span></td>
+<td><span>22 (21.57)</span></td>
+</tr>
+<tr>
+<td><span>60~69, n  (%)</span></td>
+<td><span>40 (31.50)</span></td>
+<td><span>40 (33.90)</span></td>
+<td><span>23 (21.10)</span></td>
+<td><span>39 (18.31)</span></td>
+<td><span>25 (23.36)</span></td>
+<td><span>21 (20.59)</span></td>
+</tr>
+<tr>
+<td><span>Men, n  (%)</span></td>
+<td><span>67 (52.76)</span></td>
+<td><span>70 (59.32)</span></td>
+<td><span>81 (74.31)</span></td>
+<td><span>100 (46.95)</span></td>
+<td><span>36 (33.64)</span></td>
+<td><span>35 (34.31)</span></td>
+</tr>
+<tr>
+<td><strong><span>Area</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Anseong  (Rural), n (%)</span></td>
+<td><span>68 (53.54)</span></td>
+<td><span>73 (61.86)</span></td>
+<td><span>61 (55.96)</span></td>
+<td><span>111 (52.11)</span></td>
+<td><span>77 (71.96)</span></td>
+<td><span>52 (50.98)</span></td>
+</tr>
+<tr>
+<td><span>Ansan  (Urban), n (%)</span></td>
+<td><span>59 (46.46)</span></td>
+<td><span>45 (38.14)</span></td>
+<td><span>48 (44.04)</span></td>
+<td><span>102 (47.89)</span></td>
+<td><span>30 (28.04)</span></td>
+<td><span>50 (49.02)</span></td>
+</tr>
+<tr>
+<td><strong><span>Anthropometric  measure</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Height,  cm (mean (sd))</span></td>
+<td><span>159.49 (8.53)</span></td>
+<td><span>160.37 (8.52)</span></td>
+<td><span>163.28 (8.89)</span></td>
+<td><span>160.42 (8.60)</span></td>
+<td><span>157.04 (8.39)</span></td>
+<td><span>158.29 (7.46)</span></td>
+</tr>
+<tr>
+<td><span>Weight,  cm (mean (sd))</span></td>
+<td><span>62.00 (8.60)</span></td>
+<td><span>63.29 (9.46)</span></td>
+<td><span>64.51 (9.92)</span></td>
+<td><span>62.64 (10.04)</span></td>
+<td><span>60.79 (9.56)</span></td>
+<td><span>62.72 (9.90)</span></td>
+</tr>
+<tr>
+<td><span>BMI,  kg/m2 (mean (sd))</span></td>
+<td><span>24.58 (2.82)</span></td>
+<td><span>24.36 (2.97)</span></td>
+<td><span>24.14 (2.95)</span></td>
+<td><span>24.09 (3.01)</span></td>
+<td><span>24.59 (2.92)</span></td>
+<td><span>25.30 (3.37)</span></td>
+</tr>
+<tr>
+<td><span>Waist  circumference, cm</span></td>
+<td><span>82.40 (7.97)</span></td>
+<td><span>83.09 (8.46)</span></td>
+<td><span>82.98 (7.96)</span></td>
+<td><span>82.03 (8.59)</span></td>
+<td><span>83.32 (8.36)</span></td>
+<td><span>82.73 (10.02)</span></td>
+</tr>
+<tr>
+<td><span>Hip  circumference, cm (mean (sd))</span></td>
+<td><span>92.71 (5.74)</span></td>
+<td><span>92.43 (5.48)</span></td>
+<td><span>92.58 (5.83)</span></td>
+<td><span>93.18 (5.55)</span></td>
+<td><span>93.35 (5.74)</span></td>
+<td><span>93.78 (7.13)</span></td>
+</tr>
+<tr>
+<td><span>Waist to  Hip Ratio (mean (sd))</span></td>
+<td><span>0.89 (0.07)</span></td>
+<td><span>0.90 (0.07)</span></td>
+<td><span>0.90 (0.07)</span></td>
+<td><span>0.88 (0.08)</span></td>
+<td><span>0.89 (0.07)</span></td>
+<td><span>0.88 (0.08)</span></td>
+</tr>
+<tr>
+<td><strong><span>Smoke</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Never, n  (%)</span></td>
+<td><span>74 (58.27)</span></td>
+<td><span>60 (50.85)</span></td>
+<td><span>36 (33.03)</span></td>
+<td><span>122 (57.28)</span></td>
+<td><span>73 (68.22)</span></td>
+<td><span>73 (71.57)</span></td>
+</tr>
+<tr>
+<td><span>Former,  n (%)</span></td>
+<td><span>19 (14.96)</span></td>
+<td><span>22 (18.64)</span></td>
+<td><span>25 (22.94)</span></td>
+<td><span>24 (11.27)</span></td>
+<td><span>12 (11.21)</span></td>
+<td><span>11 (10.78)</span></td>
+</tr>
+<tr>
+<td><span>Current,  n (%)</span></td>
+<td><span>32 (25.20)</span></td>
+<td><span>36 (30.51)</span></td>
+<td><span>48 (44.04)</span></td>
+<td><span>66 (30.99)</span></td>
+<td><span>21 (19.63)</span></td>
+<td><span>15 (14.71)</span></td>
+</tr>
+<tr>
+<td><strong><span>Alcohol</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>User, n  (%)</span></td>
+<td><span>5 (3.94)</span></td>
+<td><span>13 (11.02)</span></td>
+<td><span>10 (9.17)</span></td>
+<td><span>13 (6.10)</span></td>
+<td><span>3 (2.80)</span></td>
+<td><span>9 (8.82)</span></td>
+</tr>
+<tr>
+<td><span>Non-user,  n (%)</span></td>
+<td><span>55 (43.31)</span></td>
+<td><span>43 (36.44)</span></td>
+<td><span>27 (24.77)</span></td>
+<td><span>95 (44.60)</span></td>
+<td><span>59 (55.14)</span></td>
+<td><span>61 (59.80)</span></td>
+</tr>
+<tr>
+<td><span>Systolic  Blood Pressure, mmHg</span></td>
+<td><span>119.24 (18.80)</span></td>
+<td><span>119.07 (17.56)</span></td>
+<td><span>117.02 (15.92)</span></td>
+<td><span>114.75 (18.51)</span></td>
+<td><span>117.07 (16.15)</span></td>
+<td><span>117.60 (17.46)</span></td>
+</tr>
+<tr>
+<td><span>Diastolic  Blood Pressure, mmHg</span></td>
+<td><span>75.99 (11.25)</span></td>
+<td><span>76.11 (10.45)</span></td>
+<td><span>76.55 (10.25)</span></td>
+<td><span>73.82 (11.26)</span></td>
+<td><span>74.30 (9.70)</span></td>
+<td><span>75.60 (11.08)</span></td>
+</tr>
+<tr>
+<td><strong><span>Laboratory  finding</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HbA1c,  % (mean (sd))</span></td>
+<td><span>5.56 (0.33)</span></td>
+<td><span>5.59 (0.41)</span></td>
+<td><span>5.56 (0.32)</span></td>
+<td><span>5.54 (0.33)</span></td>
+<td><span>5.56 (0.35)</span></td>
+<td><span>5.51 (0.34)</span></td>
+</tr>
+<tr>
+<td><span>Fasting  glucose, mg/dL (mean (sd))</span></td>
+<td><span>84.09 (8.51)</span></td>
+<td><span>84.20 (9.36)</span></td>
+<td><span>84.38 (9.84)</span></td>
+<td><span>81.68 (8.02)</span></td>
+<td><span>81.32 (6.93)</span></td>
+<td><span>81.25 (7.20)</span></td>
+</tr>
+<tr>
+<td><span>Fasting  insulin, µIU/ml (mean (sd))</span></td>
+<td><span>6.95 (4.48)</span></td>
+<td><span>6.88 (3.38)</span></td>
+<td><span>7.05 (3.88)</span></td>
+<td><span>8.06 (5.88)</span></td>
+<td><span>8.27 (4.22)</span></td>
+<td><span>8.21 (5.19)</span></td>
+</tr>
+<tr>
+<td><span>BUN,  mg/dL (mean (sd))</span></td>
+<td><span>14.64 (3.85)</span></td>
+<td><span>14.29 (3.37)</span></td>
+<td><span>14.37 (3.44)</span></td>
+<td><span>14.07 (3.33)</span></td>
+<td><span>14.46 (3.98)</span></td>
+<td><span>14.17 (3.61)</span></td>
+</tr>
+<tr>
+<td><span>Creatinine,  mg/dL (mean (sd))</span></td>
+<td><span>0.84 (0.19)</span></td>
+<td><span>0.84 (0.16)</span></td>
+<td><span>0.89 (0.17)</span></td>
+<td><span>0.84 (0.21)</span></td>
+<td><span>0.82 (0.47)</span></td>
+<td><span>0.80 (0.15)</span></td>
+</tr>
+<tr>
+<td><span>eGFR,  ml/min per 1.73 m2 (mean (sd))</span></td>
+<td><span>90.64 (14.98)</span></td>
+<td><span>91.65 (11.90)</span></td>
+<td><span>93.18 (14.05)</span></td>
+<td><span>93.27 (13.83)</span></td>
+<td><span>94.70 (14.61)</span></td>
+<td><span>94.19 (13.65)</span></td>
+</tr>
+<tr>
+<td><span>Total  cholesterol, mg/dL (mean (sd))</span></td>
+<td><span>188.65 (33.15)</span></td>
+<td><span>192.35 (38.00)</span></td>
+<td><span>188.39 (36.02)</span></td>
+<td><span>185.05 (32.62)</span></td>
+<td><span>183.18 (30.48)</span></td>
+<td><span>188.44 (36.02)</span></td>
+</tr>
+<tr>
+<td><span>LDL,  mg/dL (mean (sd))</span></td>
+<td><span>114.78 (32.01)</span></td>
+<td><span>116.97 (33.16)</span></td>
+<td><span>105.75 (33.99)</span></td>
+<td><span>111.05 (29.71)</span></td>
+<td><span>108.55 (29.81)</span></td>
+<td><span>114.98 (32.73)</span></td>
+</tr>
+<tr>
+<td><span>HDL,  mg/dL (mean (sd))</span></td>
+<td><span>44.98 (10.39)</span></td>
+<td><span>43.04 (9.58)</span></td>
+<td><span>43.77 (11.23)</span></td>
+<td><span>44.52 (10.33)</span></td>
+<td><span>44.03 (9.11)</span></td>
+<td><span>45.27 (9.26)</span></td>
+</tr>
+<tr>
+<td><span>Triglyceride,  mg/dL (mean (sd))</span></td>
+<td><span>144.48 (72.46)</span></td>
+<td><span>161.69 (86.93)</span></td>
+<td><span>194.37 (124.54)</span></td>
+<td><span>149.50 (86.57)</span></td>
+<td><span>152.98 (94.01)</span></td>
+<td><span>140.94 (60.40)</span></td>
+</tr>
+<tr>
+<td><strong><span>Insulin resistance index</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HOMA-IR  (mean (sd))</span></td>
+<td><span>1.44 (0.88)</span></td>
+<td><span>1.45 (0.76)</span></td>
+<td><span>1.48 (0.80)</span></td>
+<td><span>1.63 (1.16)</span></td>
+<td><span>1.68 (0.89)</span></td>
+<td><span>1.66 (1.08)</span></td>
+</tr>
+<tr>
+<td><span>QUICKI  (mean (sd))</span></td>
+<td><span>0.38 (0.05)</span></td>
+<td><span>0.38 (0.05)</span></td>
+<td><span>0.38 (0.07)</span></td>
+<td><span>0.37 (0.06)</span></td>
+<td><span>0.37 (0.05)</span></td>
+<td><span>0.37 (0.06)</span></td>
+</tr>
+<tr>
+<td><strong><span>Insulin secretion index</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HOMA-β (mean (sd))</span></td>
+<td><span>140.21 (138.12)</span></td>
+<td><span>137.41 (89.14)</span></td>
+<td><span>146.95 (155.76)</span></td>
+<td><span>190.99 (191.80)</span></td>
+<td><span>185.21 (119.52)</span></td>
+<td><span>182.20 (121.24)</span></td>
+</tr>
+</tbody>
+</table><h4 id="Table2-The-baseline-characteristics-for-healthycritical-clusterlv4-group" data-id="Table2-The-baseline-characteristics-for-healthycritical-clusterlv4-group"><a class="anchor hidden-xs" href="#Table2-The-baseline-characteristics-for-healthycritical-clusterlv4-group" title="Table2-The-baseline-characteristics-for-healthycritical-clusterlv4-group"><span class="octicon octicon-link"></span></a><span>Table2. The baseline characteristics for healthy/critical cluster(lv4) group</span></h4><table>
+<thead>
+<tr>
+<th></th>
+<th><span>High risk group     (C10+C11+C12)</span></th>
+<th><span>Low risk group     (C3+C13+C15)</span></th>
+<th><span>p-value</span></th>
+<th><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-1-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msup><mi>&amp;#x03C7;</mi><mn>2</mn></msup></math>" role="presentation" style="font-size: 113%; position: relative;"><span id="MJXc-Node-1" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-2" class="mjx-mrow"><span id="MJXc-Node-3" class="mjx-msubsup"><span class="mjx-base"><span id="MJXc-Node-4" class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.224em; padding-bottom: 0.501em;">χ</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;"><span id="MJXc-Node-5" class="mjx-mn" style=""><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.39em; padding-bottom: 0.335em;">2</span></span></span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>χ</mi><mn>2</mn></msup></math></span></span><script type="math/tex" id="MathJax-Element-1">\chi^2</script></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>Number of  participants (n)</span></td>
+<td><span>354</span></td>
+<td><span>422</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>NGT, n (%)</span></td>
+<td><span>160 (45.2)</span></td>
+<td><span>244 (57.8)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Prediabetes,  n (%)</span></td>
+<td><span>194 (54.8)</span></td>
+<td><span>178 (42.2)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Age,  year (mean (sd))</span></td>
+<td><span>53.39 (9.17)</span></td>
+<td><span>51.52 (8.55)</span></td>
+<td><span>0.003</span></td>
+<td><span>0.03577</span></td>
+</tr>
+<tr>
+<td><span>40~49, n  (%)</span></td>
+<td><span>159 (44.9)</span></td>
+<td><span>210 (49.8)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>50~59, n  (%)</span></td>
+<td><span>83 (23.4)</span></td>
+<td><span>114 (27.0)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>60~69, n  (%)</span></td>
+<td><span>112 (31.6)</span></td>
+<td><span>98 (23.2)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Men, n (%)</span></td>
+<td><span>218 (61.58)</span></td>
+<td><span>171 (40.52)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Area</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span>0.98444</span></td>
+</tr>
+<tr>
+<td><span>Anseong  (Rural), n (%)</span></td>
+<td><span>202 (57.1)</span></td>
+<td><span>240 (56.9)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Ansan  (Urban), n (%)</span></td>
+<td><span>152 (42.9)</span></td>
+<td><span>182 (43.1)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Anthropometric  measure</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Height, cm  (mean (sd))</span></td>
+<td><span>160.95 (8.76)</span></td>
+<td><span>159.05 (8.39)</span></td>
+<td><span>0.002</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Weight, cm  (mean (sd))</span></td>
+<td><span>63.20 (9.34)</span></td>
+<td><span>62.19 (9.90)</span></td>
+<td><span>0.145</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>BMI,  kg/m2 (mean (sd))</span></td>
+<td><span>24.37 (2.91)</span></td>
+<td><span>24.50 (3.11)</span></td>
+<td><span>0.600</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Waist  circumference, cm</span></td>
+<td><span>82.81 (8.12)</span></td>
+<td><span>82.52 (8.90)</span></td>
+<td><span>0.647</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Hip  circumference, cm (mean (sd))</span></td>
+<td><span>92.58 (5.67)</span></td>
+<td><span>93.37 (6.00)</span></td>
+<td><span>0.062</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Waist to  Hip Ratio (mean (sd))</span></td>
+<td><span>0.89 (0.07)</span></td>
+<td><span>0.88 (0.08)</span></td>
+<td><span>0.046</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Smoke</span></strong></td>
+<td></td>
+<td></td>
+<td><span>0.000</span></td>
+<td><span>&lt;0.0001</span></td>
+</tr>
+<tr>
+<td><span>Never, n  (%)</span></td>
+<td><span>170 (48.02)</span></td>
+<td><span>268 (63.51)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Former, n  (%)</span></td>
+<td><span>66 (18.64)</span></td>
+<td><span>47 (11.14)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Current, n  (%)</span></td>
+<td><span>116 (32.77)</span></td>
+<td><span>102 (24.17)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Alcohol</span></strong></td>
+<td></td>
+<td></td>
+<td><span>&lt;0.0001</span></td>
+<td><span>0.038</span></td>
+</tr>
+<tr>
+<td><span>User, n  (%)</span></td>
+<td><span>28 (7.91)</span></td>
+<td><span>25 (5.92)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Non-user,  n (%)</span></td>
+<td><span>125 (35.31)</span></td>
+<td><span>215 (50.95)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Systolic  Blood Pressure, mmHg</span></td>
+<td><span>118.50 (17.52)</span></td>
+<td><span>116.02 (17.69)</span></td>
+<td><span>0.051</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Diastolic  Blood Pressure, mmHg</span></td>
+<td><span>76.20 (10.65)</span></td>
+<td><span>74.37 (10.84)</span></td>
+<td><span>0.018</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Laboratory  finding</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HbA1c,  % (mean (sd))</span></td>
+<td><span>5.57 (0.35)</span></td>
+<td><span>5.54 (0.34)</span></td>
+<td><span>0.189</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Fasting  glucose, mg/dL (mean (sd))</span></td>
+<td><span>84.21 (9.19)</span></td>
+<td><span>81.49 (7.55)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Fasting  insulin, µIU/ml (mean (sd))</span></td>
+<td><span>6.96 (3.95)</span></td>
+<td><span>8.15 (5.33)</span></td>
+<td><span>0.001</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>BUN,  mg/dL (mean (sd))</span></td>
+<td><span>14.44 (3.56)</span></td>
+<td><span>14.19 (3.57)</span></td>
+<td><span>0.338</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Creatinine,  mg/dL (mean (sd))</span></td>
+<td><span>0.86 (0.17)</span></td>
+<td><span>0.82 (0.29)</span></td>
+<td><span>0.064</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>eGFR,  ml/min per 1.73 m2 (mean (sd))</span></td>
+<td><span>91.76 (13.73)</span></td>
+<td><span>93.86 (13.97)</span></td>
+<td><span>0.036</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Total  cholesterol, mg/dL (mean (sd))</span></td>
+<td><span>189.81 (35.65)</span></td>
+<td><span>185.40 (32.93)</span></td>
+<td><span>0.074</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>LDL, mg/dL  (mean (sd))</span></td>
+<td><span>112.73 (33.26)</span></td>
+<td><span>111.37 (30.50)</span></td>
+<td><span>0.553</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HDL, mg/dL  (mean (sd))</span></td>
+<td><span>43.96 (10.40)</span></td>
+<td><span>44.58 (9.77)</span></td>
+<td><span>0.396</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>Triglyceride,  mg/dL (mean (sd))</span></td>
+<td><span>165.58 (97.70)</span></td>
+<td><span>148.31 (83.02)</span></td>
+<td><span>0.008</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Insulin  resistance index</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HOMA-IR  (mean (sd))</span></td>
+<td><span>1.45 (0.81)</span></td>
+<td><span>1.65 (1.07)</span></td>
+<td><span>0.006</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span>QUICKI  (mean (sd))</span></td>
+<td><span>0.38 (0.06)</span></td>
+<td><span>0.37 (0.06)</span></td>
+<td><span>0.081</span></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><span>Insulin  secretion index</span></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>HOMA-β (mean (sd))</span></td>
+<td><span>141.36 (130.04)</span></td>
+<td><span>187.40 (160.20)</span></td>
+<td><span>&lt;0.0001</span></td>
+<td></td>
+</tr>
+</tbody>
+</table><h4 id="Figures" data-id="Figures"><a class="anchor hidden-xs" href="#Figures" title="Figures"><span class="octicon octicon-link"></span></a><span>Figures</span></h4><table>
+<thead>
+<tr>
+<th><img src="" alt="t-SNE" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>Figure S1. Result of manifold learning with t-SNE. The color means logarithmic daily food intake[g], state of Diabetes Mellitus, and the label of clustering(at lv4). Foods with major intake  determine the embeding dimension.</span></td>
+</tr>
+</tbody>
+</table><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="cluster number distribution" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure S2. Cluster size and its prevalence of typical micro cluster in Lv4.</span></td>
+</tr>
+</tbody>
+</table><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="AE_loss" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure S3. Loss function of Auto Encoder. In learning process, there are step-side decreasing regardless of encoded dimension(last dimension).</span></td>
+</tr>
+</tbody>
+</table><table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="" alt="VAE_decoded" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span>Figure S4. Decoded of Variational Auto Encoder. Original dietary pattern(+) and decoded pattern of VAE(x). The VAE doesn’t learn just global information.</span></td>
+</tr>
+</tbody>
+</table><hr class="footnotes-sep"><section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><span>Kim, Y., B.G. Han, and G.E.S.g. Ko, </span><em><span>Cohort Profile: The Korean Genome and Epidemiology Study (KoGES) Consortium.</span></em><span> Int J Epidemiol, 2017. </span><strong><span>46</span></strong><span>(4): p. 1350.</span> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><span>J. E., Lee, et al. “Dietary pattern classifications with nutrient intake and health-risk factors in Korean men.” </span><em><span>Nutrition</span></em><span> 27.1 (2011): 26-33.</span> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><span>American Diabetes, A., </span><em><span>2. Classification and Diagnosis of Diabetes: Standards of Medical Care in Diabetes-2021.</span></em><span> Diabetes Care, 2021. </span><strong><span>44</span></strong><span>(Suppl 1): p. S15-S33.</span> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><span>Expert Committee on the, D. and M. Classification of Diabetes, </span><em><span>Report of the expert committee on the diagnosis and classification of diabetes mellitus.</span></em><span> Diabetes Care, 2003. </span><strong><span>26 Suppl 1</span></strong><span>: p. S5-20.</span> <a href="#fnref4" class="footnote-backref">↩︎</a> <a href="#fnref4:1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p><span>American Diabetes, A., </span><em><span>Diagnosis and classification of diabetes mellitus.</span></em><span> Diabetes Care, 2014. </span><strong><span>37 Suppl 1</span></strong><span>: p. S81-90.</span> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p><span>Blondel, Vincent D., et al. “Fast unfolding of communities in large networks Journal of Statistical Mechanics: Theory and Experiment 2008.” </span><em><span>P10008</span></em><span> (2008).</span> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn7" class="footnote-item"><p><span>Bonald, Thomas, et al. “Scikit-network: Graph Analysis in Python.” </span><em><span>J. Mach. Learn. Res.</span></em><span> 21 (2020): 185-1.</span> <a href="#fnref7" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
+<li class=""><a href="#Highlight" title="Highlight">Highlight</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
+<li class=""><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
+<li class=""><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
+<li class=""><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
+<li class=""><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
+</ul>
+</li>
+<li class=""><a href="#Method" title="Method">Method</a><ul class="nav">
+<li class=""><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
+</ul>
+</li>
+<li class=""><a href="#Result" title="Result">Result</a><ul class="nav">
+<li class=""><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
+<li class=""><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
+<li class=""><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
+</ul>
+</li>
+<li class=""><a href="#Discussion" title="Discussion">Discussion</a></li>
+<li class=""><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Dietary-Pattern-Clustering-with-diabetes" title="Dietary Pattern Clustering with diabetes">Dietary Pattern Clustering with diabetes</a><ul class="nav">
+<li class=""><a href="#Highlight" title="Highlight">Highlight</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Data-KoGES" title="Data: KoGES">Data: KoGES</a><ul class="nav">
+<li class=""><a href="#Korean-Genome-and-Epidemiology-Study" title="Korean Genome and Epidemiology Study">Korean Genome and Epidemiology Study</a></li>
+<li class=""><a href="#Dietary-pattern" title="Dietary pattern">Dietary pattern</a></li>
+<li class=""><a href="#Definition-of-diabetes-and-prediabetes" title="Definition of diabetes and prediabetes">Definition of diabetes and prediabetes</a></li>
+<li class=""><a href="#CONSORT-flow-diagram" title="CONSORT flow diagram">CONSORT flow diagram</a></li>
+</ul>
+</li>
+<li class=""><a href="#Method" title="Method">Method</a><ul class="nav">
+<li class=""><a href="#Modularity-based-clustering" title="Modularity-based clustering">Modularity-based clustering</a></li>
+</ul>
+</li>
+<li class=""><a href="#Result" title="Result">Result</a><ul class="nav">
+<li class=""><a href="#Hierarchical-cluster" title="Hierarchical cluster">Hierarchical cluster</a></li>
+<li class=""><a href="#Details-in-micro-clusters-lv4" title="Details in micro clusters (lv4)">Details in micro clusters (lv4)</a></li>
+<li class=""><a href="#Manifold-learning-Auto-Encoder" title="Manifold learning: Auto Encoder">Manifold learning: Auto Encoder</a></li>
+</ul>
+</li>
+<li class=""><a href="#Discussion" title="Discussion">Discussion</a></li>
+<li class=""><a href="#Supplementary-Material" title="Supplementary Material">Supplementary Material</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
 </body>
+
 </html>
