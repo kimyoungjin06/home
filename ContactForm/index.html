@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!--
+	Road Trip by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<meta name="description" content="Google Form at GitHub Pages" />
+<meta
+    name="keywords"
+    content="한양대학교, 응용물리학과, 한국에너지공과대학, 수리과학연구소, 김영진, NIMS, KENTECH, Hanyang, Game Theory"
+/>
+<meta name="author" content="Young Jin Kim" />
+<html>
+    <head>
+        <title>Y. J. KIM</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../assets/css/main.css" />
+        <script
+            src="https://kit.fontawesome.com/759aa314c0.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <a href="../index.html"
+                    >인생은 아름답게 <span>feat. Dolce Far Niente</span></a
+                >
+            </div>
+            <a href="#menu"><span>Menu</span></a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="../index.html">My Story</a></li>
+                <li><a href="../generic.html">Y. J. KIM</a></li>
+                <!-- 					<li><a href="elements.html">참고</a></li> -->
+            </ul>
+        </nav>
+
+        <section
+            id="post"
+            class="wrapper bg-img"
+            data-bg="../../images/백패킹.jpeg"
+        >
+            <div class="inner">
+                <article class="box">
+                    <header>
+                        <h2>Contact Form Example</h2>
+                    </header>
+                    <!-- https://docs.google.com/forms/d/e/1FAIpQLSdHu04vrd__--k9uCwtlJ81dUTdBnoDFqdDij_61Tt-LWQlfA/viewform?
+            usp=pp_url&
+            entry.1023798851=Name&
+            entry.152813615=Mail@test.test&
+            entry.51146864=1&
+            entry.1080994224=A&
+            entry.1080994224=B&
+            entry.1080994224=C&
+            entry.49275512=b -->
+                    <!-- The address of 'form' is from ...forms/<address>/viewform 
+                        must be added like forms/d/e/blabla...
+                        And change 'viewform' to 'formResponse'-->
+                    <form
+                        id="formId"
+                        action="https://docs.google.com/forms/d/e/1FAIpQLSdHu04vrd__--k9uCwtlJ81dUTdBnoDFqdDij_61Tt-LWQlfA/formResponse"
+                        target="hidden_iframe"
+                        onsubmit="submitted=true;"
+                    >
+                    <!-- All Item  set equally the 'name' of input and'address' of question-->
+                        <div class="form-floating">
+                            <input
+                                type="text"
+                                name="entry.1023798851"
+                                id="form-Name"
+                                placeholder="Your Name*"
+                            />
+                            <label for="name">Name*</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input
+                                type="email"
+                                name="entry.152813615"
+                                id="form-mail"
+                                placeholder="E-mail*"
+                            />
+                            <label for="email">E-mail*</label>
+                        </div>
+
+                        <label>Q1</label>
+                        <div class="form-check-wrapper">
+                            <!-- Also, set equally the 'value' of input and'answer' of question-->
+                            <fieldset>
+                                <legend>Choose your Answer for Q1:</legend>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="form-Q1-1"
+                                        name="entry.51146864"
+                                        value="1"
+                                        checked
+                                    />
+                                    <label for="form-Q1-1">1</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="form-Q1-2"
+                                        name="entry.51146864"
+                                        value="2"
+                                    />
+                                    <label for="form-Q1-2">2</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="form-Q1-3"
+                                        name="entry.51146864"
+                                        value="3"
+                                    />
+                                    <label for="form-Q1-3">3</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="form-Q1-4"
+                                        name="entry.51146864"
+                                        value="4"
+                                    />
+                                    <label for="form-Q1-4">4</label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <label>Q2</label>
+                        <div class="form-check-wrapper">
+                            <fieldset>
+                                <legend>Choose (multiple) your Answer for Q2:</legend>
+
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="form-Q2-A"
+                                        name="entry.1080994224"
+                                        value="A"
+                                        checked
+                                    />
+                                    <label for="form-Q2-A">A</label>
+                                </div>
+
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="form-Q2-B"
+                                        name="entry.1080994224"
+                                        value="B"
+                                    />
+                                    <label for="form-Q2-B">B</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="form-Q2-C"
+                                        name="entry.1080994224"
+                                        value="C"
+                                    />
+                                    <label for="form-Q2-C">C</label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <label>Q3</label>
+                        <div class="form-floating">
+                            <legend>Choose your Answer for Q3:</legend>
+                            <select name="entry.49275512" id="form-Q3">
+                                <option value="a">a</option>
+                                <option value="b">b</option>
+                                <option value="c">c</option>
+                            </select>
+                        </div>
+
+                        <!-- <label>Q4</label>
+            <div>
+              <textarea
+                id="entry.1209414153"
+                name="entry.1209414153"
+                placeholder="Message"
+                rows="2"
+              >
+              </textarea>
+              <label for="message">Send any other Options</label>
+            </div> -->
+                        <button type="submit" value="Submit">Submit</button>
+                    </form>
+                    <!-- This iframe need to restricted pop-up google-form-->
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted) {}"></iframe>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <h3>김영진 金英珍 Young Jin Kim</h3>
+                <div class="field">
+                    <label for="tel">Tel: +82-10-3062-6113</label>
+                    <label for="email">Email: kimyoungjin06@gmail.com</label>
+                    <label for="motto">느리더라도, 꾸준하게 :)</label>
+                </div>
+
+                <ul class="icons">
+                    <li>
+                        <a
+                            href="https://www.facebook.com/Young.Jin.Kim.06"
+                            class="icon round fa-facebook"
+                            ><span class="label">Facebook</span></a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.instagram.com/kimyoungjin06/"
+                            class="icon round fa-instagram"
+                            ><span class="label">Instagram</span></a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/kimyoungjin06/"
+                            class="icon round fa-github"
+                            ><span class="label">GitHub</span></a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://noanswercode.tistory.com/"
+                            class="icon round fa-blog"
+                            ><span class="label">noanswercode</span></a
+                        >
+                    </li>
+                </ul>
+
+                <div class="copyright">
+                    &copy; Modification:
+                    <a href="mailto:kimyoungjin06@gmail.com">김영진</a>. Design:
+                    <a href="https://templated.co">TEMPLATED</a>. Images:
+                    <a href="https://unsplash.com">Unsplash</a>.
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/jquery.scrolly.min.js"></script>
+        <script src="../assets/js/jquery.scrollex.min.js"></script>
+        <script src="../assets/js/skel.min.js"></script>
+        <script src="../assets/js/util.js"></script>
+        <script src="../assets/js/main.js"></script>
+
+        <script type="text/javascript">
+            var submitted = false;
+        </script>
+        <script type="text/javascript">
+            // The "submit" means the type of button 'Send/Submit' from line ~ 196 in this example
+            $("#formId").on("submit", function (e) {
+                $("#formId *").fadeOut(2000);
+                $("#formId").prepend(
+                    "Your submission has been processed! ;)<br><br> If the information is not correct,<br>Please re-submit."
+                    +"<br>If you want to check"
+                    +"If you want to check the result, <br>check <a href='https://docs.google.com/spreadsheets/d/1L8DeQHp6brvxFeb3Y28ydwPoowjH-hxsP1OKpcuWyXM/edit?usp=sharing'>Link</a>"
+                );
+            });
+        </script>
+
+    </body>
+</html>
